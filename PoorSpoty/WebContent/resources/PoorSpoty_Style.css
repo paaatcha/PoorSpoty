@@ -1,0 +1,143 @@
+﻿@charset "utf-8";
+/* CSS Reset*/
+
+/* Colocando a fonte no site */
+@font-face {
+     font-family: PoorSpoty;
+     src: url(fonte/sansation.ttf);
+}
+
+
+*{
+	font-family: Arial, Tahoma, Verdana;
+	font-size:14px;
+	margin:0;
+	padding:0;
+	font-weight:normal;
+	position: relative;
+}
+
+a{
+	color:#000;
+	text-decoration:none;
+}
+
+ul, ol{
+	list-style:none;
+}
+
+body{
+	background:#FFF;
+}
+
+a img{
+	border: none;
+}
+
+/* Fim CSS reset */
+
+/* Página Principal */
+#boxPrincipal{
+	height: 600px;
+	width: 500px;	
+	margin: 20px auto;
+	border: 1px #666 solid;	
+}
+
+#cabecalho{
+	height: 35px;
+	margin: 0 auto;
+	background: #eee;	
+	border-bottom: 2px #666 solid;	
+}
+
+#cabecalho li{
+	font-family: PoorSpoty;	
+	float: right;
+	padding-left: 20px;
+	padding-top: 10px;
+}
+
+#cabecalho li:first-child{
+	padding-right: 10px;
+}
+
+#cabecalho li a{
+	color: #2BAE52;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+#cabecalho li a:hover{
+	text-decoration: underline;
+}
+
+#boxPrincipal h1{
+	font-family: PoorSpoty;
+	font-size: 60px;
+	font-weight: bold;
+	color: #669900;
+	text-align: center;	
+}
+
+#boxPrincipal h2{	
+	text-align: center;	
+	margin-top: 15px;	
+}
+
+#boxPrincipal h2 a{
+	font-family: PoorSpoty;
+	font-size: 20px;
+	font-weight: bold;
+	color: #669900;
+	text-align: center;		
+}
+
+#boxPrincipal h2 a:hover{
+	color: #2BAE52;
+	text-decoration: underline;			
+}
+
+#boxPrincipal img{
+	margin-left: 125px;
+	margin-top: 30px;
+}
+
+#boxLogin{
+	height: 150px;
+	width: 260px;
+	margin: 0 auto;
+	
+}
+
+#formLogin p{
+	padding-top: 10px;
+	font-size: 14px;
+	font-weight: bold;
+	font-family: PoorSpoty;
+	color: #669900;
+}
+
+#formLogin input{
+	background-color: #eee; 
+	font-size: 14px;
+	font-family: PoorSpoty;	
+	border:1px solid #666;
+	height: 25px;
+	color: #669900;
+}
+
+.botao{
+	font-weight: bold;
+	width: 260px;	
+}
+
+.botao:hover{
+	cursor: pointer;
+}
+
+
+
+
+
+
