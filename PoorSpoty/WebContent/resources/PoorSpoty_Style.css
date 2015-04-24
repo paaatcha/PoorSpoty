@@ -38,7 +38,9 @@ a img{
 
 /* Página Principal */
 #boxPrincipal{
-	height: 600px;
+	height:auto;
+    min-height:100%;
+	/*overflow:hidden;*/
 	width: 500px;	
 	margin: 20px auto;
 	border: 1px #666 solid;	
@@ -53,13 +55,9 @@ a img{
 
 #cabecalho li{
 	font-family: PoorSpoty;	
-	float: right;
+	float: left;
 	padding-left: 20px;
 	padding-top: 10px;
-}
-
-#cabecalho li:first-child{
-	padding-right: 10px;
 }
 
 #cabecalho li a{
@@ -104,10 +102,30 @@ a img{
 }
 
 #boxLogin{
-	height: 150px;
+	height:auto;
+    min-height:100%;
 	width: 260px;
-	margin: 0 auto;
-	
+	margin: 0 auto;	
+}
+
+#textoLogin p{
+	font-family: PoorSpoty;
+	font-size: 15px;	
+	text-align: justify;	
+	color: #669900;
+	display:block;
+	width: 400px;
+	margin-left: -75px;
+
+}
+
+#formLogin p span{
+	text-decoration: underline;	
+	padding-top: 10px;
+	font-size: 16px;
+	font-weight: bold;
+	font-family: PoorSpoty;
+	color: #669900;
 }
 
 #formLogin p{
@@ -125,6 +143,23 @@ a img{
 	border:1px solid #666;
 	height: 25px;
 	color: #669900;
+}
+
+.labelCadastro label{
+	color: #669900;
+	font-size: 14px;
+	font-family: PoorSpoty;	
+	font-weight: bold;
+}
+
+.boxDecricao{
+	background-color: #eee; 
+	font-size: 14px;
+	font-family: PoorSpoty;	
+	border:1px solid #666;	
+	color: #669900;
+	width: 300px;
+	height: 150px;
 }
 
 .botao{

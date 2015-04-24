@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="#{facesContext.externalContext.requestContextPath}/resources/PoorSpoty_Style.css" rel="stylesheet" type="text/css" />
+
+<link href="#{facesContext.externalContext.requestContextPath}/resources/imagens/icon.png" rel='shortcut icon'/>
+
+<title><h:outputText value="PoorSpoty | " /><ui:insert name="title" /></title>
+</h:head>
+<h:body>
+
+<div id="boxPrincipal">
+	<div id="cabecalho">
+		<ul>
+			<li> <a href="#{facesContext.externalContext.requestContextPath}/"> Login </a> </li>
+			<li> <a href="#{facesContext.externalContext.requestContextPath}/pag_inicial/oquee.faces"> O que é </a> </li>			
+			<li> <a href="#{facesContext.externalContext.requestContextPath}/pag_inicial/sugestao.faces"> Sugestão </a> </li>
+			
+				
+		</ul>
+	</div>
+
+	<img src="#{facesContext.externalContext.requestContextPath}/resources/imagens/logo.png" />
+	
+	<h1> PoorSpoty </h1>  
+	
+	<div id="boxLogin">
+		<ui:insert name="login" />
+		<br></br>
+	</div>
+
+	<ui:insert name="link_cadastro">
+		<h2> <a href="#{facesContext.externalContext.requestContextPath}/pag_inicial/cadastro.faces"> Cadastre-se! É grátis! </a></h2>
+	</ui:insert>
+	<br></br>
+</div>
+</h:body>
+</html>

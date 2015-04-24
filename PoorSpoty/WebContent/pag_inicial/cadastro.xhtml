@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      template="/resources/decorator_login.xhtml">
+      
+      <ui:define name="title">Cadastro</ui:define>      
+      <ui:define name="login">
+      	 <h:form id="formLogin">
+      	 	
+      	 	<p> <span> Dados Pessoais: </span> </p>
+      	 	
+      		<p>Nome*: </p>
+      		<h:inputText value="" id="nome" size="35" required="true" />
+      		
+      		<p>Sobrenome*: </p>
+      		<h:inputText value="" id="sobrenome" size="35" required="true" />
+      		
+      		<p>Data de nascimento*: </p>
+      		<h:inputText value="#{maskView.date}" id="data_nasc" size="15" required="true" />
+      		<p:outputLabel for="data_nasc" value="Date: " />
+        	<p:inputMask id="date" value="#{maskView.date}" mask="99/99/9999"/>
+      		
+      		<p>Sexo*: </p>
+      		<h:selectOneRadio value="" id="sexo" styleClass="labelCadastro" required="true">
+      			<f:selectItem itemLabel="Feminino" itemValue="F"/>
+      			<f:selectItem itemLabel="Masculino" itemValue="M"/>	      		
+      		</h:selectOneRadio>
+      		
+      		<p>Email*: </p>
+      		<h:inputText value="" id="email" size="35" required="true" validatorMessage="O email não é válido">
+      			 <f:validateRegex
+					pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+      		</h:inputText>
+      		<h:message for="email"/>
+      		
+      		<p>Nick para login*: </p>
+      		<h:inputText value="" id="nick" size="35" required="true" validatorMessage="O nick deve conter apenas caracters ecaracter e/ou números. O tamanho máximo é 16 caracters">
+      			<f:validateRegex pattern="[a-z][1-9]{16}"/>
+      		</h:inputText>
+      		<h:message for="nick"/>
+      		
+      		<p>Senha*: </p>
+      		<h:inputSecret value="" id="senha" size="35" required="true" validatorMessage="A senha deve conter no mínimo 6 e no máximo 16 caracters">
+      			<f:validateLength maximum="16" minimum="6"/>
+      		</h:inputSecret>
+      		<h:message for="senha"/>
+      		
+      		<p>Reescreva a senha*:</p>
+      		<h:inputSecret value="" id="senha2" size="35" required="true" />
+      		
+      		<br></br>
+     		<p> <span> Preferências: </span> </p>
+      		
+      		<p>Banda Predileta 1*:<br></br> <h:inputText value="" id="banda1" size="35" required="true" /></p>
+      		
+      		<p>Banda Predileta 2:<br></br> <h:inputText value="" id="banda2" size="35" /></p>
+      		
+      		<p> Estilos musical que você gosta*:</p>
+      		<h:selectManyCheckbox value="" id="estilos_gosta" layout="pageDirection" styleClass="labelCadastro" required="true">
+      			<f:selectItem itemValue="Rock"/>      			
+      			<f:selectItem itemValue="Heavy Metal"/>      			
+      			<f:selectItem itemValue="Pagode"/>
+      			<f:selectItem itemValue="Samba"/>
+      			<f:selectItem itemValue="Axé"/>
+      			<f:selectItem itemValue="Pop"/>
+      			<f:selectItem itemValue="Eletrônica"/>
+      			<f:selectItem itemValue="Forró"/>
+      			<f:selectItem itemValue="Reggae"/>
+      			<f:selectItem itemValue="Classica"/>
+      			<f:selectItem itemValue="Jazz"/>
+      			<f:selectItem itemValue="MPB"/>
+      			<f:selectItem itemValue="Bossa Nova"/>
+      			<f:selectItem itemValue="Funk"/>
+      			<f:selectItem itemValue="Sertanejo"/>     		
+      		</h:selectManyCheckbox>
+      		<br></br>
+      		<p> Estilos musical que você não gosta*:</p>
+      		<h:selectManyCheckbox value="" id="estilos_nao_gosta" layout="pageDirection" styleClass="labelCadastro" required="true">
+      			<f:selectItem itemValue="Rock"/>      			
+      			<f:selectItem itemValue="Heavy Metal"/>      			
+      			<f:selectItem itemValue="Pagode"/>
+      			<f:selectItem itemValue="Samba"/>
+      			<f:selectItem itemValue="Axé"/>
+      			<f:selectItem itemValue="Pop"/>
+      			<f:selectItem itemValue="Eletrônica"/>
+      			<f:selectItem itemValue="Forró"/>
+      			<f:selectItem itemValue="Reggae"/>
+      			<f:selectItem itemValue="Classica"/>
+      			<f:selectItem itemValue="Jazz"/>
+      			<f:selectItem itemValue="MPB"/>
+      			<f:selectItem itemValue="Bossa Nova"/>
+      			<f:selectItem itemValue="Funk"/>
+      			<f:selectItem itemValue="Sertanejo"/>     		
+      		</h:selectManyCheckbox>     		
+      		
+      		<br></br>
+      		<p> Faça uma breve descrição para seu perfil: </p>
+      		<h:inputTextarea value="" id="descricao_pessoal" styleClass="boxDecricao"/>			    
+			      		     		
+      		<p>Campos com * são obrigatórios</p>
+      		<p><h:commandButton  value="Enviar" styleClass="botao" /></p>
+      	</h:form>      	
+      </ui:define>
+      
+      
+      
+      <ui:define name="link_cadastro">      	 	
+      </ui:define>
+     
+     
+</ui:composition>
+
