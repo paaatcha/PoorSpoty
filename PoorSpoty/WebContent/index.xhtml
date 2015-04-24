@@ -4,16 +4,25 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       template="/resources/decorator_login.xhtml">
       
       <ui:define name="title">Bem vindo</ui:define>      
       <ui:define name="login">
       	<h:form id="formLogin">
-      		<p>Nick:<br></br> <h:inputText id="nick" size="35" /></p>
       		
-      		<p>Password:<br></br> <h:inputSecret id="password" size="35" /></p>     		
-      		
-      		<p><h:commandButton  value="Entrar" class="botao"/></p>
+      		<h:panelGrid columns="2" cellpadding="5">
+	      		<h:outputText value="Nick: " />
+	      		<p:inputText id="nick" size="25" />
+	      		
+	      		<h:outputText value="Senha: " />    		
+	      		<p:password id="senha_login" size="25" />     		
+	      		
+	      		<br></br>
+	      		<br></br>
+	      		
+	      		<p:commandButton  value="Entrar" class="botao"/>
+	      	</h:panelGrid>
       	</h:form>      
       </ui:define>
      

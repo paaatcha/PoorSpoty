@@ -136,6 +136,22 @@ a img{
 	color: #669900;
 }
 
+#formLogin td{
+	padding-top: 10px;
+	font-size: 14px;
+	font-weight: bold;
+	font-family: PoorSpoty;
+	color: #669900;
+}
+
+#formLogin label{
+	padding-top: 10px;
+	font-size: 14px;
+	font-weight: bold;
+	font-family: PoorSpoty;
+	color: #669900;
+}
+
 #formLogin input{
 	background-color: #eee; 
 	font-size: 14px;
@@ -158,13 +174,15 @@ a img{
 	font-family: PoorSpoty;	
 	border:1px solid #666;	
 	color: #669900;
-	width: 300px;
+	width: 220px;
 	height: 150px;
 }
 
 .botao{
 	font-weight: bold;
 	width: 120px;
+	color: #669900;
+	font-weight: bold;
 	
 }
 
