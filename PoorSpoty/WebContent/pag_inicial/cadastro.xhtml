@@ -12,60 +12,60 @@
       	 <h:form id="formLogin">      	   	 
       	 	<p> <span> Dados Pessoais: </span> </p>
 
-		    <h:panelGrid columns="2" cellpadding="5">
+		    
 		    	
-		    	<h:outputText value="Nome: *" />        		
-      			<p:inputText value="" id="nome" required="true" />
+		    	<p> Nome* :</p>        		
+      			<p:inputText value="" size="30" id="nome" required="true" />
       			
-      			<h:outputText value="Sobrenome: *" />
-      			<p:inputText value="" id="sobrenome" required="true" />
+      			<p> Sobrenome* :</p> 
+      			<p:inputText value="" size="30" id="sobrenome" required="true" />
 		    			    		
-		    	<h:outputText value="Data de nascimento: *" />
+		    	<p> Data de nascimento* :</p>
         		<p:inputMask id="data_nasc" value="#{maskView.date}" mask="99/99/9999" required="true"/>        		      			    			    	
 		    	   	
-		    	<h:outputText value="Sexo: *" />		    	
+		    	<p> Sexo* : </p>		    	
 				<p:selectOneRadio value="" id="sexo" required="true">
       				<f:selectItem itemLabel="Feminino" itemValue="F"/>
       				<f:selectItem itemLabel="Masculino" itemValue="M"/>	      		
       			</p:selectOneRadio>	      				
 				
-				<h:outputText value="Email: *" />
-				<p:inputText value="" id="email" required="true" validatorMessage="Formato de email inválido">
+				<p> E-mail* :</p>
+				<p:inputText value="" size="30" id="email" required="true" validatorMessage="Formato de email inválido">
       			 <f:validateRegex
 					pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 				 <h:message for="email"/>
       			</p:inputText>
       			
       			
-      			<h:outputText value="Nick: *" />
-      			<p:inputText value="" id="nick"  required="true" validatorMessage="O nick deve conter apenas caracters ecaracter e/ou números. O tamanho máximo é 16 caracters">
+      			<p> Nick para login* :</p>
+      			<p:inputText value="" size="30" id="nick"  required="true" validatorMessage="O nick deve conter apenas caracters ecaracter e/ou números. O tamanho máximo é 16 caracters">
       				<f:validateRegex pattern="[a-z][1-9]{16}"/> 
       				<h:message for="nick"/>
       			</p:inputText>
       							
       			      			  			
-      			<h:outputText value="Senha: *" />
-        		<p:password id="senha1" value="" match="senha2" label="senha_1" required="true" />
+      			<p> Senha* :</p>
+        		<p:password id="senha1" size="30" value="" match="senha2" label="senha_1" required="true" />
  
-        		<h:outputText value="Repita a senha: *" />
-        		<p:password id="senha2" value="" label="senha_2" required="true" />  
+        		<p> Repita a senha* :</p>
+        		<p:password id="senha2" size="30" value="" label="senha_2" required="true" />  
         		
-        	</h:panelGrid>
+        	
         		
 			<p:spacer height="10" /> 
     		<p:separator />
     		<p:spacer height="10" />
     		<p> <span> Preferências: </span> </p>          		
         		
-        	<h:panelGrid columns="2" cellpadding="5">
-        		<h:outputText value="Banda preferida 1: *" />
-        		<p:inputText value="" id="banda1" required="true" />
+        	
+        		<p> Banda preferida 1* :</p>
+        		<p:inputText value="" size="30" id="banda1" required="true" />
         		
-        		<h:outputText value="Banda preferida 2:" />
-        		<p:inputText value="" id="banda2" />
+        		<p> Banda preferida 2 :</p>
+        		<p:inputText value="" size="30" id="banda2" />
       		
       			<!--  tEM UM JEITO MUITO MELHOR DE FAZER, MAS TEM QUE IMPLEMENTAR AS BEANS -->
-      			<h:outputText value="Estilos que você curte: *" />
+      			<p> Estilos musicais que você curte* :</p>
         		<h:selectManyCheckbox id="estilos_curte" value="" layout="pageDirection" required="true">
             		<f:selectItem itemValue="Rock"/>      			
 	      			<f:selectItem itemValue="Heavy Metal"/>      			
@@ -85,7 +85,7 @@
         		</h:selectManyCheckbox>
         		
         		        		
-        		<h:outputText value="Estilos que você NÃO curte: *" />
+        		<p> Estilos musicais que você NÃO curte* :</p>
         		<h:selectManyCheckbox id="estilos_nao_curte" value="" layout="pageDirection" required="true">
             		<f:selectItem itemValue="Rock"/>      			
 	      			<f:selectItem itemValue="Heavy Metal"/>      			
@@ -104,25 +104,10 @@
 	      			<f:selectItem itemValue="Sertanejo"/> 
         		</h:selectManyCheckbox>
         		
-        		<h:outputText value="Faça uma breve descrição para seu perfil: " />        		
+        		<p> Faça uma breve descrição para seu perfil:  </p>        		
       			<p:inputTextarea value="" id="descricao_pessoal" styleClass="boxDecricao"/>	       		
         		
-        		<p:commandButton value="Enviar" id="botao_enviar" class="botao"  />
-        		 			
-      			
-      		</h:panelGrid>
-      			
-      			
-				
-		 
-		   
-		      	 	
-      	 	
-      	 	
-      	
-      	
-      	
-      	
+        		<p:commandButton value="Enviar" id="botao_enviar" class="botao"  />     	
 
       	</h:form>      	
       </ui:define>
