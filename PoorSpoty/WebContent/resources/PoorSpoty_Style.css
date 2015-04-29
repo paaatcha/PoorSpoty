@@ -22,6 +22,10 @@ a{
 	text-decoration:none;
 }
 
+a:hover{
+	text-decoration: underline;
+}
+
 ul, ol{
 	list-style:none;
 }
@@ -189,8 +193,53 @@ a img{
 	cursor: pointer;
 }
 
+/* #################### Decorator do usuário ######################## */
 
+#cabecalhoUsuario{
+	height: 80px;	
+	border-bottom: 1px solid #ccc;
+}
 
+#cabecalhoUsuario div{
+	float: left; 	
+	padding-left: 800px;		
+}
+
+#cabecalhoUsuario div:first-child{
+	padding-left: 0px;
+	margin-left: 150px;	
+}
+
+#cabecalhoUsuario ul li{
+	float: left;
+	padding-left: 20px;
+}
+
+#cabecalhoUsuario ul li:first-child{	
+	padding-left: 0px;
+}
+
+#cabecalhoUsuario img{
+	height: 60px;
+	width: 60px;
+	margin-top: 10px;
+}
+
+#logoUsuario h1{
+	font-family: PoorSpoty;
+	font-size: 30px;
+	font-weight: bold;
+	color: #669900;
+	line-height: 80px;		
+}
+
+#menuCabecalhoUsuario li a{
+	font-family: PoorSpoty;
+	font-size: 20px;
+	font-weight: bold;
+	color: #669900;
+	line-height: 80px;	
+}
 
 
 
