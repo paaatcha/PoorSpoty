@@ -200,14 +200,18 @@ a img{
 	border-bottom: 1px solid #ccc;
 }
 
-#cabecalhoUsuario div{
-	float: left; 	
-	padding-left: 800px;		
+#logoUsuario{
+	float: left;
 }
 
-#cabecalhoUsuario div:first-child{
-	padding-left: 0px;
-	margin-left: 150px;	
+#menuCabecalhoUsuario{
+	float: right;
+}
+
+#boxAuxCabUsuario{
+	width: 900px;
+	height: 80px;	
+	margin: 0 auto;	
 }
 
 #cabecalhoUsuario ul li{
@@ -241,5 +245,103 @@ a img{
 	line-height: 80px;	
 }
 
+#boxPrincipalUsuario{
+	width: 1000px;
+	height:auto;
+    min-height:100%;
+    margin: 0 auto;      	
+}
+
+.textoUsuario{
+	width: 800px;
+	height:auto;
+    min-height:100%;
+    margin: 0 auto;
+    margin-top: 35px;
+}
+
+.textoUsuario p{
+	font-family: PoorSpoty;
+	font-size: 18px;	
+	color: #669900;
+	text-align: justify;
+	display: block;
+	padding-top: 20px;
+}
+
+.textoUsuario h1{
+	font-family: PoorSpoty;
+	font-size: 50px;
+	font-weight: bold;
+	color: #669900;	
+}
+
+#dadosUsuario{
+	width: 800px;
+	height:auto;
+    min-height:100%;
+    margin: 0 auto;         	
+}
+
+#dadosUsuario div{
+	float: left;	
+	margin-top: 30px;	
+}
+
+#boxAvatar img{
+	border: 1px #ccc solid;
+	padding: 2px;
+	margin: 10px;
+}
+
+#boxDados li {
+	font-family: PoorSpoty;
+	font-size: 18px;	
+	color: #669900;		
+}
+
+#boxDados li span{
+	font-family: PoorSpoty;
+	font-size: 20px;
+	font-weight: bold;	
+	color: #669900;		
+}
+
+#boxDados h2{
+	font-family: PoorSpoty;
+	font-size: 40px;
+	font-weight: bold;	
+	color: #669900;		
+}
+
+.boxBorda{
+	height: 2px;	
+	border-bottom: 1px solid #ccc;	
+}
+
+.boxBordaClear{
+	height: 40px;	
+	border-bottom: 1px solid #ccc;
+	clear: both;
+}
+
+#boxRankings{
+	width: 800px;
+	height:auto;
+    min-height:100%;
+    margin: 0 auto;      
+}
+
+#boxRankings div{	
+	margin-top: 40px;
+	
+}
+
+#boxRankings h2{
+	font-family: PoorSpoty;
+	font-size: 40px;
+	font-weight: bold;	
+	color: #669900;	
+}
 
 

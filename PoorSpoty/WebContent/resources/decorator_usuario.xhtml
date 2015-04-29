@@ -13,25 +13,64 @@
 </h:head>
 <h:body>
 
-<div id="cabecalhoUsuario">
-
-	<div id="logoUsuario">
-		<ul>
-			<li> <img src="#{facesContext.externalContext.requestContextPath}/resources/imagens/logo.png" /> </li>	
-			<li> <h1> PoorSpoty </h1> </li>
-		</ul>
+	<div id="cabecalhoUsuario">
+	
+		<div id="boxAuxCabUsuario">
+			<div id="logoUsuario">
+				<ul>
+					<li> <img src="#{facesContext.externalContext.requestContextPath}/resources/imagens/logo.png" /> </li>	
+					<li> <h1> PoorSpoty </h1> </li>
+				</ul>
+			</div>
+			
+			<div id="menuCabecalhoUsuario">
+				<ul>
+					<li> <a href="#{facesContext.externalContext.requestContextPath}/pag_usuario/inicio.faces"> Início </a> </li>
+					<li> <a href="#{facesContext.externalContext.requestContextPath}/pag_usuario/ajuda.faces"> Ajuda </a> </li>
+					<li> <a href="#"> Sair </a> </li>
+						
+				</ul>	
+			</div>
+		</div>
 	</div>
 	
-	<div id="menuCabecalhoUsuario">
-		<ul>
-			<li> <a href="#"> Ajuda </a> </li>
-			<li> <a href="#"> Sair </a> </li>
-				
-		</ul>	
+	<div class="boxBorda">				
 	</div>
 
-
+	<div id="boxPrincipalUsuario">
+		<ui:insert name="principalUsuario" />		
+	</div>	
 	
-</div>
+	<div class="boxBordaClear">				
+	</div>
+
+	<div id="boxRankings">	
+		<div id="boxRankingBandas">
+			<h2> Top 5 bandas PoorSpoty: </h2>
+			<ul>
+				<li> getBanda1 (); </li>
+				<li> getBanda2 (); </li>
+				<li> getBanda3 (); </li>
+				<li> getBanda4 (); </li>
+				<li> getBanda5 (); </li>		
+			</ul>
+		</div>
+	
+		<div id="boxRankingEstilos">
+			<h2> Top 5 estilos PoorSpoty: </h2>		
+			<ul>
+				<li> getEstilo1 (); </li>
+				<li> getEstilo2 (); </li>
+				<li> getEstilo3 (); </li>
+				<li> getEstilo4 (); </li>
+				<li> getEstilo5 (); </li>		
+			</ul>		
+		</div>	
+	
+	 </div>
+	
+
+
+
 </h:body>
 </html>

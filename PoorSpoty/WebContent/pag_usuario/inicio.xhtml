@@ -8,7 +8,47 @@
       
       <ui:define name="title">Vamos ouvir algo novo?</ui:define>      
          	
+      <ui:define name="principalUsuario">
       
+      
+      	<div id="dadosUsuario">
+      		
+      		<div id="boxAvatar">
+      			<img src="#{facesContext.externalContext.requestContextPath}/resources/imagens/masc/m8.jpg" />      		
+      		</div>
+      		
+      		<div id="boxDados">
+      		
+      			<h2> Bem vindo getNome(); </h2>
+      			
+      			<ul>
+      				<li> 
+      					<span> Idade: </span> getIdade ();    				
+      				</li>
+      				
+      				<li>
+      					<span> Banda prefida(s): </span> getBanda1 (); e getBanda2 ();       				
+      				</li>
+      				
+      				<li> 
+      					<span> Estilos que gosta: </span> getEstilosCurte ();    				
+      				</li>
+      				
+      				<li> 
+      					<span> Estilos que não gosta: </span> getEstilosNaoCurte ();
+      				</li>
+      			
+      				<li> 
+      					<span> Descrição pessoal: </span> getDescrição ();
+      				</li>     			
+      			</ul>     		
+      		</div>      		
+      		
+      	
+      	</div>    
+      
+      
+      </ui:define>
      
      
 </ui:composition>
