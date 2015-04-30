@@ -41,40 +41,50 @@
 		<ui:insert name="principalUsuario" />		
 	</div>	
 	
-	<div class="boxBordaClear">				
-	</div>
-
-	<div id="boxRankings">	
-		<div id="boxRankingBandas">
-			<h2> Top 5 bandas PoorSpoty: </h2>
-			<ol>
-				<li> getBanda1 (); </li>
-				<li> getBanda2 (); </li>
-				<li> getBanda3 (); </li>
-				<li> getBanda4 (); </li>
-				<li> getBanda5 (); </li>		
-			</ol>
+	<ui:insert name="parteInferiorUsuario">	
+		<div class="boxBordaClear">				
 		</div>
 	
-		<div id="boxRankingEstilos">
-			<h2> Top 5 estilos PoorSpoty: </h2>		
-			<ol>
-				<li> getEstilo1 (); </li>
-				<li> getEstilo2 (); </li>
-				<li> getEstilo3 (); </li>
-				<li> getEstilo4 (); </li>
-				<li> getEstilo5 (); </li>		
-			</ol>		
-		</div>	
+		<div id="boxRankings">	
+			<div id="boxRankingBandas">
+				<h2> Top 5 bandas PoorSpoty: </h2>
+				<ol>
+					<li> getBanda1 (); </li>
+					<li> getBanda2 (); </li>
+					<li> getBanda3 (); </li>
+					<li> getBanda4 (); </li>
+					<li> getBanda5 (); </li>		
+				</ol>
+			</div>
+		
+			<div id="boxRankingEstilos">
+				<h2> Top 5 estilos PoorSpoty: </h2>		
+				<ol>
+					<li> getEstilo1 (); </li>
+					<li> getEstilo2 (); </li>
+					<li> getEstilo3 (); </li>
+					<li> getEstilo4 (); </li>
+					<li> getEstilo5 (); </li>		
+				</ol>		
+			</div>	
+		
+		 </div>
+		 
+		 <div class="boxBordaClear">				
+		 </div>
+		
+		<div id="boxSugestao">
+			<h:form>
+				<h:commandLink action="/pag_usuario/construcao.faces" value="Me sugira algo novo" />
+			</h:form>		
+				
+		</div>
+		
+		<div class="boxBordaClear">				
+		 </div>
+	</ui:insert>
+		 
 	
-	 </div>
-	 
-	 <div class="boxBordaClear">				
-	</div>
-	
-	<div id="boxPrincipalUsuario">
-		<ui:insert name="sugerir" />		
-	</div>
 
 
 
