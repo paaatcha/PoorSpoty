@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/resources/decorator.xhtml">
+
+	<ui:define name="titulo">Cadastro de estiloMusicals</ui:define>
+	<ui:define name="h1">Lista de estiloMusicals</ui:define>
+
+	<ui:define name="contents">
+		<h:dataTable var="estiloMusical" value="#{manageEstiloMusical.estilosMusicais}">
+			<h:column>
+					<f:facet name="header">
+						<h:outputText value="nome" />
+					</f:facet>
+					<h:outputText value="#{estiloMusical.nome}" />
+				</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="modificar" />
+				</f:facet>
+				<h:form>
+					<h:commandButton action="#{manageEstiloMusical.alterar}"
+						value="modificar" />
+				</h:form>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="apagar" />
+				</f:facet>
+				<h:form>
+					<h:commandButton action="#{manageEstiloMusical.excluir}"
+						value="apagar" />
+				</h:form>
+			</h:column>
+		</h:dataTable>
+		<br />
+		<h:form>
+			<h:commandLink value="novo estilo musical"
+				action="#{manageEstiloMusical.adicionar}" />
+		</h:form>
+	</ui:define>
+</ui:composition>

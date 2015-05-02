@@ -1,5 +1,6 @@
 package br.PoorSpoty.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -13,8 +14,10 @@ import javax.persistence.TemporalType;
 
 
 @Entity
-public class Usuario {
-
+public class Usuario implements Serializable{
+	/** Serialization id. */
+	private static final long serialVersionUID = 1L;
+	
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String nome;
