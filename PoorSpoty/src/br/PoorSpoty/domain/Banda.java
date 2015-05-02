@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Banda implements Serializable{
@@ -17,6 +18,9 @@ public class Banda implements Serializable{
 	private Long id;
 	
 	private String nome;
+	
+	@OneToOne
+	private EstiloMusical estilo;
 
 	public Long getId() {
 		return id;
@@ -32,6 +36,14 @@ public class Banda implements Serializable{
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public EstiloMusical getEstilo() {
+		return estilo;
+	}
+
+	public void setEstilo(EstiloMusical estilo) {
+		this.estilo = estilo;
 	}
 	
 	
