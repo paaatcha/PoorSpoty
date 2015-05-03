@@ -123,7 +123,7 @@ a img{
 
 }
 
-#formLogin p span{
+.formLogin p span{
 	text-decoration: underline;	
 	padding-top: 10px;
 	font-size: 16px;
@@ -132,7 +132,7 @@ a img{
 	color: #669900;
 }
 
-#formLogin p{
+.formLogin p{
 	padding-top: 10px;
 	font-size: 14px;
 	font-weight: bold;
@@ -140,7 +140,7 @@ a img{
 	color: #669900;
 }
 
-#formLogin td{
+.formLogin td{
 	padding-top: 10px;
 	font-size: 14px;
 	font-weight: bold;
@@ -148,7 +148,7 @@ a img{
 	color: #669900;
 }
 
-#formLogin label{
+.formLogin label{
 	padding-top: 10px;
 	font-size: 14px;
 	font-weight: bold;
@@ -156,7 +156,7 @@ a img{
 	color: #669900;
 }
 
-#formLogin input{
+.formLogin input{
 	background-color: #eee; 
 	font-size: 14px;
 	font-family: PoorSpoty;	
@@ -390,5 +390,37 @@ a img{
 	color: #fff;
 	background: #669900;
 }
+
+/* ######################## manages ######################### */
+.boxManage{
+	width: 650px;	
+	margin: 0 auto;
+	margin-top: 40px;
+}
+
+.boxManage form{
+	display: block;
+	width: 250px;
+	margin: 0 auto;
+}
+
+.boxManage form p{
+	padding-bottom: 10px;
+}
+
+.formCadsBanEst button{
+	width: 200px;
+	display: block;
+	margin: 0 auto;
+}
+
+
+
+
+
+
+
+
+
 
 

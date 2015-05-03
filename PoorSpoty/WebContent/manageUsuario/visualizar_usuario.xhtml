@@ -4,25 +4,55 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	template="/resources/decorator.xhtml">">
+	xmlns:p="http://primefaces.org/ui"
+	template="/resources/decorator_usuario.xhtml">">
 
-	<ui:define name="titulo">Cadastro de usuario</ui:define>
-	<ui:define name="h1">Cadastro de usuario</ui:define>
+	<ui:define name="title">Formulário de cadastro</ui:define>
+	<ui:define name="cabecalhoUsuario">	
+		<div id="boxAuxCabUsuario">
+				<div id="logoUsuario">
+					<ul>
+						<li> <img src="#{facesContext.externalContext.requestContextPath}/resources/imagens/logo.png" /> </li>	
+						<li> <h1> PoorSpoty - Formulário de cadastro</h1> </li>
+					</ul>
+				</div>
+		
+			</div>
+	</ui:define>
 
-	<ui:define name="contents">
-		<h:form>
-Nome: <h:inputText value="#{manageUsuario.usuario.nome}" />
-			<br />
-Sobrenome: <h:inputText value="#{manageUsuario.usuario.sobrenome}" />
-			<br />
-Email: <h:inputText value="#{manageUsuario.usuario.email}" />
-			<br />
-Sexo: <h:inputText value="#{manageUsuario.usuario.sexo}" />
-			<br />
-			<h:commandButton action="#{manageUsuario.salvar}" value="salvar" />
-			<br />
-			<h:commandLink action="listar_usuarios" value="Voltar" />
-		</h:form>
+	
+	<ui:define name="principalUsuario">
+		<div class="boxManage">
+			<h:form class="formLogin">
+				<p> Nome: </p> 
+				<p:inputText value="#{manageUsuario.usuario.nome}" />
+				
+				<p> Sobrenome: </p> 
+				<p:inputText value="#{manageUsuario.usuario.sobrenome}" />
+				
+				<p> Email: </p> 
+				<p:inputText value="#{manageUsuario.usuario.email}" />
+				
+				<p> Sexo: </p> 
+				<p:inputText value="#{manageUsuario.usuario.sexo}" />
+				
+				<p> Estilo favorito 1: </p>
+				 <p:selectOneMenu value="">
+					<f:selectItems value="#{manageBanda.estilos}" />
+				</p:selectOneMenu>				
+				
+				
+				<br></br><br></br>
+				<p:commandButton class="botao" action="#{manageUsuario.salvar}" value="Salvar" />
+				
+				<p:commandButton class="botao" action="listar_usuarios" value="Voltar" />
+			</h:form>
+		</div>
 
 	</ui:define>
+	
+	
+	<ui:define name="parteInferiorUsuario">	
+	</ui:define>
+	
 </ui:composition>

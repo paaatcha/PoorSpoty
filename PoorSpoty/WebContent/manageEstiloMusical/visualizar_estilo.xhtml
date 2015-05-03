@@ -4,20 +4,51 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" 
-	template="/resources/decorator.xhtml">">
+	xmlns:p="http://primefaces.org/ui"
+	template="/resources/decorator_usuario.xhtml">
 
-	<ui:define name="titulo">Cadastro de estilo musicais</ui:define>
-	<ui:define name="h1">Cadastro de estilo musicais</ui:define>
 
-	<ui:define name="contents">
-		<h:form>
-Nome: <h:inputText value="#{manageEstiloMusical.estiloMusical.nome}" />
-			<br />
-			<br />
-			<h:commandButton action="#{manageEstiloMusical.salvar}" value="salvar" />
-			<br />
-			<h:commandLink action="listar_estilos" value="Voltar" />
-		</h:form>
+	<ui:define name="title">Cadastro e listagem de estilos musicais</ui:define>
+	<ui:define name="cabecalhoUsuario">	
+		<div id="boxAuxCabUsuario">
+				<div id="logoUsuario">
+					<ul>
+						<li> <img src="#{facesContext.externalContext.requestContextPath}/resources/imagens/logo.png" /> </li>	
+						<li> <h1> PoorSpoty - Cadastro e listagem de bandas</h1> </li>
+					</ul>
+				</div>
+				
+					
+					<div id="menuCabecalhoUsuario">
+						<ul>							
+							<li> <a href="#"> Sair </a> </li>								
+						</ul>	
+					</div>				
+			</div>
+	</ui:define>
+
+	<ui:define name="principalUsuario">
+	
+		<div class="boxManage">
+			<h:form class="formLogin">
+				<p> Nome: </p> 
+				<p:inputText value="#{manageEstiloMusical.estiloMusical.nome}" />
+				
+				<br></br><br></br>
+				<p:commandButton class="botao" action="#{manageEstiloMusical.salvar}" value="Salvar" />
+				
+				<p:commandButton class="botao" action="listar_estilos" value="Voltar" />
+			</h:form>
+		</div>
 
 	</ui:define>
+	
+	<ui:define name="parteInferiorUsuario">	
+	</ui:define>
+	
+	
+	
+	
+	
+	
 </ui:composition>

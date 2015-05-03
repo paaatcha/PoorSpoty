@@ -4,23 +4,47 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	template="/resources/decorator.xhtml">">
+	xmlns:p="http://primefaces.org/ui"
+	template="/resources/decorator_usuario.xhtml">
 
-	<ui:define name="titulo">Cadastro de bandas</ui:define>
-	<ui:define name="h1">Cadastro de bandas</ui:define>
+	<ui:define name="title">Cadastro e listagem de bandas</ui:define>
+	<ui:define name="cabecalhoUsuario">	
+		<div id="boxAuxCabUsuario">
+				<div id="logoUsuario">
+					<ul>
+						<li> <img src="#{facesContext.externalContext.requestContextPath}/resources/imagens/logo.png" /> </li>	
+						<li> <h1> PoorSpoty - Cadastro e listagem de bandas</h1> </li>
+					</ul>
+				</div>
+				
+					
+					<div id="menuCabecalhoUsuario">
+						<ul>							
+							<li> <a href="#"> Sair </a> </li>								
+						</ul>	
+					</div>				
+			</div>
+	</ui:define>
 
-	<ui:define name="contents">
-		<h:form>
-Nome: <h:inputText value="#{manageBanda.banda.nome}" />
-			<br />
-Estilo Musical: <h:selectOneMenu value="#{manageBanda.estilo}">
-				<f:selectItems value="#{manageBanda.estilos}" />
-			</h:selectOneMenu>
-			<br />
-			<h:commandButton action="#{manageBanda.salvar}" value="salvar" />
-			<br />
-			<h:commandLink action="listar_bandas" value="Voltar" />
-		</h:form>
+	<ui:define name="principalUsuario">
+		<div class="boxManage">
+			<h:form class="formLogin">
+				<p> Nome: </p> 
+				<p:inputText value="#{manageBanda.banda.nome}" />
+				
+				<p> Estilo Musical: </p>
+				 <p:selectOneMenu value="#{manageBanda.estilo}">
+					<f:selectItems value="#{manageBanda.estilos}" />
+				</p:selectOneMenu>
+				<br></br><br></br>
+				<p:commandButton class="botao" action="#{manageBanda.salvar}" value="salvar" />
+				
+				<p:commandButton class="botao" action="listar_bandas" value="Voltar" />
+			</h:form>
+		</div>
 
+	</ui:define>
+	
+	<ui:define name="parteInferiorUsuario">	
 	</ui:define>
 </ui:composition>

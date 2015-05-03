@@ -4,42 +4,65 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	template="/resources/decorator.xhtml">
+	xmlns:p="http://primefaces.org/ui"
+	template="/resources/decorator_usuario.xhtml">
 
-	<ui:define name="titulo">Cadastro de estiloMusicals</ui:define>
-	<ui:define name="h1">Lista de estiloMusicals</ui:define>
-
-	<ui:define name="contents">
-		<h:dataTable var="estiloMusical" value="#{manageEstiloMusical.estilosMusicais}">
-			<h:column>
-					<f:facet name="header">
-						<h:outputText value="nome" />
-					</f:facet>
-					<h:outputText value="#{estiloMusical.nome}" />
-				</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="modificar" />
-				</f:facet>
-				<h:form>
-					<h:commandButton action="#{manageEstiloMusical.alterar}"
-						value="modificar" />
-				</h:form>
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="apagar" />
-				</f:facet>
-				<h:form>
-					<h:commandButton action="#{manageEstiloMusical.excluir}"
-						value="apagar" />
-				</h:form>
-			</h:column>
-		</h:dataTable>
-		<br />
-		<h:form>
-			<h:commandLink value="novo estilo musical"
-				action="#{manageEstiloMusical.adicionar}" />
-		</h:form>
+	<ui:define name="title">Cadastro e listagem de bandas</ui:define>
+	<ui:define name="cabecalhoUsuario">	
+		<div id="boxAuxCabUsuario">
+				<div id="logoUsuario">
+					<ul>
+						<li> <img src="#{facesContext.externalContext.requestContextPath}/resources/imagens/logo.png" /> </li>	
+						<li> <h1> PoorSpoty - Cadastro e listagem de bandas</h1> </li>
+					</ul>
+				</div>
+				
+					
+					<div id="menuCabecalhoUsuario">
+						<ul>							
+							<li> <a href="#"> Sair </a> </li>								
+						</ul>	
+					</div>				
+			</div>
 	</ui:define>
+	
+		<ui:define name="principalUsuario">
+
+		<div class="boxManage">
+
+			<p:dataTable var="estiloMusical" value="#{manageEstiloMusical.estilosMusicais}" rows="10"
+	                         paginator="true"
+	                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                         rowsPerPageTemplate="5,10,15">
+			    <p:column headerText="Nome">
+			        <h:outputText value="#{estiloMusical.nome}" />
+			    </p:column>
+			    		    
+			    <p:column headerText="">
+			        <h:form class="formLogin">
+						<p:commandButton class="botao" action="#{manageEstiloMusical.alterar}" value="Modificar" />
+					</h:form>
+			    </p:column>
+			    
+			    <p:column headerText="">
+			        <h:form class="formLogin">
+						<p:commandButton class="botao" action="#{manageEstiloMusical.excluir}" value="Apagar" />
+					</h:form>
+			    </p:column>			   
+			</p:dataTable>
+			
+			<br></br>
+			<br></br>		
+			
+			<h:form class="formCadsBanEst">
+				<p:commandButton class="botao" value="Cadastrar novo estilo" action="#{manageEstiloMusical.adicionar}" />
+			</h:form>
+		
+		</div>
+		
+	</ui:define>
+
+	<ui:define name="parteInferiorUsuario">	
+	</ui:define>
+	
 </ui:composition>
