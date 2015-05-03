@@ -56,12 +56,10 @@ public class ManageBanda implements Serializable{
 	
 	public List<SelectItem> getEstilos(){
 		this.estilos = new ArrayList<SelectItem>();
-		System.out.println("Entrou aqui");
 		try{
 			List<EstiloMusical> estilos= this.estiloMusicalDAO.listar();
 			for(EstiloMusical estilo : estilos){
 				this.estilos.add(new SelectItem(estilo.getId(), estilo.getNome()));
-				System.out.println(estilo.getNome());
 			}
 		}catch(Exception e){
 			e.printStackTrace();

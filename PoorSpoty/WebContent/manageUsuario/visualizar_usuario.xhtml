@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/resources/decorator.xhtml">">
+
+	<ui:define name="titulo">Cadastro de usuario</ui:define>
+	<ui:define name="h1">Cadastro de usuario</ui:define>
+
+	<ui:define name="contents">
+		<h:form>
+Nome: <h:inputText value="#{manageUsuario.usuario.nome}" />
+			<br />
+Sobrenome: <h:inputText value="#{manageUsuario.usuario.sobrenome}" />
+			<br />
+Email: <h:inputText value="#{manageUsuario.usuario.email}" />
+			<br />
+Sexo: <h:inputText value="#{manageUsuario.usuario.sexo}" />
+			<br />
+			<h:commandButton action="#{manageUsuario.salvar}" value="salvar" />
+			<br />
+			<h:commandLink action="listar_usuarios" value="Voltar" />
+		</h:form>
+
+	</ui:define>
+</ui:composition>
