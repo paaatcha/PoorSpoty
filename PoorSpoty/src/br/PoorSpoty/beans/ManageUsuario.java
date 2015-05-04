@@ -65,7 +65,6 @@ public class ManageUsuario implements Serializable{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		//return "/manageUsuario/listar_usuarios";		
 	}
 	
 	public String alterar(){
@@ -75,44 +74,5 @@ public class ManageUsuario implements Serializable{
 	
 	public String retornar (){
 		return "/manageUsuario/listar_usuarios";
-	}
-	
-	/*
-	
-	
-	
-	public Usuario getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-	
-	
-	
-	public String adicionar(){
-		this.usuario = new Usuario();
-		return "/manageUsuario/visualizar_usuario";
-	}
-	
-	
-		
-	public String salvar(){
-		this.usuario = new Usuario();
-		try{
-			this.usuarioDAO.salvar(usuario);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return "/manageUsuario/listar_usuarios";
 	}	
-	
-	
-	
-	public String retornar(){
-		return "/manageUsuario/listar_usuarios";
-	}
-
-	*/
-
 }

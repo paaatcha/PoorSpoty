@@ -64,13 +64,12 @@ public class ManageEstiloMusical implements Serializable {
 		return "/manageEstiloMusical/listar_estilos";
 	}
 		
-	public String excluir(){
+	public void excluir(){
 		Long idEstilo = ((EstiloMusical)this.estilosMusicais.getRowData()).getId();
 		try{
 			this.estiloMusicalDAO.excluir(idEstilo);
 		}catch(Exception e){
 			e.printStackTrace();
-		}
-		return "/manageEstiloMusical/listar_estilos";
+		}		
 	}
 }

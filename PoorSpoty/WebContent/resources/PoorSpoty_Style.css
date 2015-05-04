@@ -398,13 +398,19 @@ a img{
 	margin-top: 40px;
 }
 
-.boxManage form{
+.boxManageUsuario{
+	width: 950px;	
+	margin: 0 auto;
+	margin-top: 40px;	
+}
+
+.boxManage form, .boxManageUsuario form{
 	display: block;
 	width: 250px;
 	margin: 0 auto;
 }
 
-.boxManage form p{
+.boxManage form p, , .boxManageUsuario form p{
 	padding-bottom: 10px;
 }
 
@@ -437,8 +443,20 @@ a img{
 	background: #669900;
 }
 
+#tabelaListarUsuario a, #tabelaListarEstilo a, #tabelaListarBanda a{
+	font-weight: bold;
+	background: #aaa;
+	padding: 3px;
+	border-radius: 5px;
+	color: #fff;
+	background: #669900;
+}
 
-
+#tabelaListarUsuario a:hover, #tabelaListarEstilo a:hover, #tabelaListarBanda a:hover{
+	text-decoration: none;
+	color: #8BCE00;
+	background: #333;
+}
 
 
 

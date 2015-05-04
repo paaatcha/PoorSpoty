@@ -29,9 +29,9 @@
 	
 		<ui:define name="principalUsuario">
 
-		<div class="boxManage">
+		<div class="boxManageUsuario">
 
-			<p:dataTable var="usuario" value="#{manageUsuario.usuarios}" rows="10"
+			<p:dataTable id="tabelaListarUsuario" var="usuario" value="#{manageUsuario.usuarios}" rows="10"
 	                         paginator="true"
 	                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 	                         rowsPerPageTemplate="5,10,15">
@@ -54,13 +54,15 @@
 			    
 			    <p:column headerText="">
 			        <h:form class="formLogin">
-						<p:commandButton class="botao" action="#{manageUsuario.alterar}" value="Modificar" />
+						<p:commandLink action="#{manageUsuario.alterar}" value="Modificar" />
 					</h:form>
 			    </p:column>
 			    
 			    <p:column headerText="">
 			        <h:form class="formLogin">
-						<p:commandButton class="botao" action="#{manageUsuario.excluir}" value="Apagar" />						
+						<p:commandLink action="#{manageUsuario.excluir}" value="Apagar">
+							<f:ajax render="tabelaListarUsuario" />
+						</p:commandLink>						
 					</h:form>
 			    </p:column>			   
 			</p:dataTable>

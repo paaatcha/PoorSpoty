@@ -32,7 +32,7 @@
 
 		<div class="boxManage">
 
-			<p:dataTable var="banda" value="#{manageBanda.bandas}" rows="10"
+			<p:dataTable id="tabelaListarBanda" var="banda" value="#{manageBanda.bandas}" rows="10"
 	                         paginator="true"
 	                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 	                         rowsPerPageTemplate="5,10,15">
@@ -46,13 +46,15 @@
 			    
 			    <p:column headerText="">
 			        <h:form class="formLogin">
-						<p:commandButton class="botao" action="#{manageBanda.alterar}" value="Modificar" />
+						<p:commandLink action="#{manageBanda.alterar}" value="Modificar" />
 					</h:form>
 			    </p:column>
 			    
 			    <p:column headerText="">
 			        <h:form class="formLogin">
-						<p:commandButton class="botao" action="#{manageBanda.excluir}" value="Apagar" />
+						<p:commandLink action="#{manageBanda.excluir}" value="Apagar">
+							<f:ajax render="tabelaListarBanda" />							                
+						</p:commandLink>					
 					</h:form>
 			    </p:column>			   
 			</p:dataTable>

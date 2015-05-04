@@ -97,14 +97,13 @@ public class ManageBanda implements Serializable{
 		return  "/manageBanda/listar_bandas"; 
 	}
 		
-	public String excluir(){
+	public void excluir(){
 		Long idBanda = (this.bandas.getRowData()).getId();
 		try {
 			this.bandaDAO.excluir(idBanda);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		return  "/manageBanda/listar_bandas"; 
+		}		 
 	}
 
 	
