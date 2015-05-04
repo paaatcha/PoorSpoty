@@ -24,22 +24,76 @@
 	<ui:define name="principalUsuario">
 		<div class="boxManage">
 			<h:form class="formLogin">
+				<p:messages autoUpdate="true"/>
+			
 				<p> Nome: </p> 
-				<p:inputText value="#{manageUsuario.usuario.nome}" />				
+				<p:inputText id="nome" value="#{manageUsuario.usuario.nome}" 
+				required="true" 
+				requiredMessage="Seu nome não foi informado."				
+				/>
+				<br></br>
+				<p:message for="nome" />
+            	<h:outputText value="#{manageUsuario.usuario.nome}" /> 							
+				
 				
 				<p> Sobrenome: </p> 
-				<p:inputText value="#{manageUsuario.usuario.sobrenome}" />
+				<p:inputText value="#{manageUsuario.usuario.sobrenome}" 
+				required="true" 
+				requiredMessage="Seu sobrenome não foi informado."
+				/>
+				
 				
 				<p> Email: </p> 
-				<p:inputText value="#{manageUsuario.usuario.email}" />
+				<p:inputText id="email" value="#{manageUsuario.usuario.email}" 
+				required="true"
+				requiredMessage="Seu email não foi informado."
+				validatorMessage="Seu e-mail não está no formato correto"
+				>				
+					<f:validateRegex
+					pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 				
-				<p> Sexo: </p> 
-				<p:inputText value="#{manageUsuario.usuario.sexo}" />
+				</p:inputText>
+				<p:message for="email" />
+            	<h:outputText value="#{manageUsuario.usuario.email}" />
 				
-								
+				
+				<p> Sexo: </p>				
+				<p:selectOneRadio id="sexo" value="#{manageUsuario.usuario.sexo}" 
+				required="true" requiredMessage="Seu sexo não foi informado.">
+      				<f:selectItem itemLabel="Feminino" itemValue="F"/>
+      				<f:selectItem itemLabel="Masculino" itemValue="M"/>	      		
+      			</p:selectOneRadio>
+											
+				
+				<p> Data de nascimento* :</p>
+        		<p:inputMask id="dataNasc" value="#{manageUsuario.usuario.dataNasc}" mask="99/99/9999" 
+        		required="true"
+        		requiredMessage="Sua data de nascimento não foi informada."
+        		>
+        			<f:convertDateTime pattern="dd/MM/yyyy" />
+        		</p:inputMask>
+				<p:message for="dataNasc" />
+            	<h:outputText value="#{manageUsuario.usuario.dataNasc}" />
+				
+				
+				<p> Nick para login: </p> 
+				<p:inputText id="nick" value="#{manageUsuario.usuario.nick}" 
+				required="true"
+				requiredMessage="Seu nick não foi informado."
+				validatorMessage="Seu nick deve conter apenas letras e/ou numeros num total de 1 a 20 caracters"
+				>				
+					<f:validateRegex pattern="[\w]{1,20}" />
+				
+				</p:inputText>
+				<p:message for="nick" />
+            	<h:outputText value="#{manageUsuario.usuario.nick}" />
+				
+				
+				
+				
 				
 				<br></br><br></br>
-				<p:commandButton class="botao" action="#{manageUsuario.salvar}" value="Salvar" />
+				<p:commandButton class="botao" action="#{manageUsuario.salvar}" validateClient="true" ajax="false" icon="ui-icon-check" value="Salvar" />
 				
 				<p:commandButton class="botao" action="#{manageUsuario.retornar}" value="Voltar" />
 			</h:form>

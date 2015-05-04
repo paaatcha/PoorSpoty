@@ -52,6 +52,10 @@
 			        <h:outputText value="#{usuario.sexo}" />
 			    </p:column>	
 			    
+			    <p:column headerText="Data Nasc">
+			        <h:outputText value="#{usuario.dataNasc}" />
+			    </p:column>	
+			    
 			    <p:column headerText="">
 			        <h:form class="formLogin">
 						<p:commandLink action="#{manageUsuario.alterar}" value="Modificar" />

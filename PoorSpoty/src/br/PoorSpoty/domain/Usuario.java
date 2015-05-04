@@ -25,6 +25,7 @@ public class Usuario implements Serializable{
 	private String email;
 	private String senha;
 	private char sexo;
+	private String nick;
 	
 	@Temporal(TemporalType.DATE)
 	private Date dataNasc;
@@ -89,6 +90,14 @@ public class Usuario implements Serializable{
 
 	public void setDataNasc(Date dataNasc) {
 		this.dataNasc = dataNasc;
+	}
+	
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
 	}
 
 	public Set<Banda> getBandas() {
