@@ -28,7 +28,7 @@ public class ManageUsuario implements Serializable{
 	@EJB
 	UsuarioDAO estiloMusicalDAO;
 	
-	Usuario usuario;
+	Usuario usuario = new Usuario();
 	DataModel<Usuario> usuarios;
 	
 	public Usuario getUsuario() {
@@ -56,7 +56,7 @@ public class ManageUsuario implements Serializable{
 		this.usuario = (Usuario) (this.usuarios.getRowData());
 		return "/manageUsuario/visualizar_usuario";
 	}
-	
+		
 	public String salvar(){
 		try{
 			this.usuarioDAO.salvar(usuario);
@@ -64,8 +64,8 @@ public class ManageUsuario implements Serializable{
 			e.printStackTrace();
 		}
 		return "/manageUsuario/listar_usuarios";
-	}
-		
+	}	
+	
 	public String excluir(){
 		Long idUsuario = ((Usuario)this.usuarios.getRowData()).getId();
 		try{
@@ -76,6 +76,8 @@ public class ManageUsuario implements Serializable{
 		return "/manageUsuario/listar_usuarios";
 	}
 	
-	
+	public String retornar(){
+		return "/manageUsuario/listar_usuarios";
+	}
 
 }

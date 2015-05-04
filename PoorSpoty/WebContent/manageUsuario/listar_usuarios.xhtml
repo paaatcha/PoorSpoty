@@ -26,69 +26,6 @@
 			</div>
 	</ui:define>
 
-	<ui:define name="contents">
-		<h:dataTable var="usuario" value="#{manageUsuario.usuarios}">
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="nome" />
-				</f:facet>
-				<h:outputText value="#{usuario.nome}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="sobrenome" />
-				</f:facet>
-				<h:outputText value="#{usuario.sobrenome}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="dataNasc" />
-				</f:facet>
-				<h:outputText value="#{usuario.dataNasc}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="email" />
-				</f:facet>
-				<h:outputText value="#{usuario.email}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="senha" />
-				</f:facet>
-				<h:outputText value="#{usuario.senha}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="sexo" />
-				</f:facet>
-				<h:outputText value="#{usuario.sexo}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="modificar" />
-				</f:facet>
-				<h:form>
-					<h:commandButton action="#{manageUsuario.alterar}"
-						value="modificar" />
-				</h:form>
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="apagar" />
-				</f:facet>
-				<h:form>
-					<h:commandButton action="#{manageUsuario.excluir}" value="apagar" />
-				</h:form>
-			</h:column>
-		</h:dataTable>
-		<br />
-		<h:form>
-			<h:commandLink value="novo usuario"
-				action="#{manageUsuario.adicionar}" />
-		</h:form>
-	</ui:define>
-	
 	
 		<ui:define name="principalUsuario">
 
@@ -128,8 +65,14 @@
 			    </p:column>			   
 			</p:dataTable>
 			
+						
 			<br></br>
-			<br></br>		
+			<br></br>
+			
+			<h:form class="formCadsBanEst">
+				<p:commandButton class="botao" value="Cadastrar novo usuarios" action="#{manageUsuario.adicionar}" />
+			</h:form>
+		
 	
 		</div>
 		
