@@ -25,7 +25,7 @@
 		<div class="boxManage">
 			<h:form class="formLogin">
 				<p> Nome: </p> 
-				<p:inputText value="#{manageUsuario.usuario.nome}" />
+				<p:inputText value="#{manageUsuario.usuario.nome}" />				
 				
 				<p> Sobrenome: </p> 
 				<p:inputText value="#{manageUsuario.usuario.sobrenome}" />
@@ -36,11 +36,7 @@
 				<p> Sexo: </p> 
 				<p:inputText value="#{manageUsuario.usuario.sexo}" />
 				
-				<p> Estilo favorito 1: </p>
-				 <p:selectOneMenu value="">
-					<f:selectItems value="#{manageBanda.estilos}" />
-				</p:selectOneMenu>				
-				
+								
 				
 				<br></br><br></br>
 				<p:commandButton class="botao" action="#{manageUsuario.salvar}" value="Salvar" />

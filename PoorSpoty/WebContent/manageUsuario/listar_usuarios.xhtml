@@ -31,7 +31,7 @@
 
 		<div class="boxManage">
 
-			<p:dataTable var="usuario" value="#{manageUsuario.usuario}" rows="10"
+			<p:dataTable var="usuario" value="#{manageUsuario.usuarios}" rows="10"
 	                         paginator="true"
 	                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 	                         rowsPerPageTemplate="5,10,15">
@@ -60,7 +60,7 @@
 			    
 			    <p:column headerText="">
 			        <h:form class="formLogin">
-						<p:commandButton class="botao" action="#{manageUsuario.excluir}" value="Apagar" />
+						<p:commandButton class="botao" action="#{manageUsuario.excluir}" value="Apagar" />						
 					</h:form>
 			    </p:column>			   
 			</p:dataTable>
@@ -70,7 +70,7 @@
 			<br></br>
 			
 			<h:form class="formCadsBanEst">
-				<p:commandButton class="botao" value="Cadastrar novo usuarios" action="#{manageUsuario.adicionar}" />
+				<p:commandButton class="botao" value="Cadastrar novo usuario" action="#{manageUsuario.adicionar}" />
 			</h:form>
 		
 	
