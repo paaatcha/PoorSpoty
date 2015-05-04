@@ -22,12 +22,15 @@
 
 	
 	<ui:define name="principalUsuario">
-		<div class="boxManage">
+		<div class="boxManage">			
 			<h:form class="formLogin">
+				<h2> Informações pessoais: </h2>
+				<br></br><br></br>
+				
 				<p:messages autoUpdate="true"/>
 			
-				<p> Nome: </p> 
-				<p:inputText id="nome" value="#{manageUsuario.usuario.nome}" 
+				<p> Nome* : </p> 
+				<p:inputText size="30" id="nome" value="#{manageUsuario.usuario.nome}" 
 				required="true" 
 				requiredMessage="Seu nome não foi informado."				
 				/>
@@ -37,14 +40,12 @@
 				
 				
 				<p> Sobrenome: </p> 
-				<p:inputText value="#{manageUsuario.usuario.sobrenome}" 
-				required="true" 
-				requiredMessage="Seu sobrenome não foi informado."
+				<p:inputText size="30" value="#{manageUsuario.usuario.sobrenome}"				
 				/>
 				
 				
-				<p> Email: </p> 
-				<p:inputText id="email" value="#{manageUsuario.usuario.email}" 
+				<p> Email* : </p> 
+				<p:inputText size="30" id="email" value="#{manageUsuario.usuario.email}" 
 				required="true"
 				requiredMessage="Seu email não foi informado."
 				validatorMessage="Seu e-mail não está no formato correto"
@@ -57,7 +58,7 @@
             	<h:outputText value="#{manageUsuario.usuario.email}" />
 				
 				
-				<p> Sexo: </p>				
+				<p> Sexo* : </p>				
 				<p:selectOneRadio id="sexo" value="#{manageUsuario.usuario.sexo}" 
 				required="true" requiredMessage="Seu sexo não foi informado.">
       				<f:selectItem itemLabel="Feminino" itemValue="F"/>
@@ -76,8 +77,8 @@
             	<h:outputText value="#{manageUsuario.usuario.dataNasc}" />
 				
 				
-				<p> Nick para login: </p> 
-				<p:inputText id="nick" value="#{manageUsuario.usuario.nick}" 
+				<p> Nick para login* : </p> 
+				<p:inputText size="30" id="nick" value="#{manageUsuario.usuario.nick}" 
 				required="true"
 				requiredMessage="Seu nick não foi informado."
 				validatorMessage="Seu nick deve conter apenas letras e/ou numeros num total de 1 a 20 caracters"
@@ -87,15 +88,54 @@
 				</p:inputText>
 				<p:message for="nick" />
             	<h:outputText value="#{manageUsuario.usuario.nick}" />
+            	
+            	<p> Senha* :</p>
+            	<p:password id="senha1" value="#{manageUsuario.usuario.senha}" feedback="true"
+                    promptLabel="Força da senha" weakLabel="Fraca"
+                    goodLabel="Média" strongLabel="Forte" 
+                    match="senha2"
+                    required="true"
+                    requiredMessage="Sua senha 1 não foi informada."
+                    validatorMessage="A senha 1 não é igual a senha 2."
+                    />
+            	<p:message for="senha1" />
+            	<h:outputText value="#{manageUsuario.usuario.senha}" />
+            	
+            	 
+        		<p> Repita a senha anterior* :</p>
+        		<p:password id="senha2" value="#{manageUsuario.usuario.senha}" 
+                    required="true"
+                    requiredMessage="Sua senha 1 não foi informada."                    
+                    />
+                    
 				
-				
-				
-				
-				
+				<p> Faça uma breve descrição para seu perfil:  </p>        		
+      			<p:inputTextarea value="#{manageUsuario.usuario.descricao}" styleClass="boxDecricao"/>				
 				<br></br><br></br>
+				
+				<h2> Preferências musicais: </h2>				
+				<br></br><br></br>
+				<p> Estilos musicais que você curte*: </p>
+				 <p:autoComplete id="estiloCurte" value="#{manageUsuario.estiloCurtido}" 
+				 completeMethod="#{manageUsuario.completaNome}" 
+				 required="true"
+				 requiredMessage="Você deve escolher pelo menos 1 estilo que curte"
+				 >
+				 	<f:ajax event="select" render="listaCurti" listener="#{manageUsuario.inserirEstiloCurtido}" />
+				 </p:autoComplete>
+				             	 
+				 <h:outputText value="#{manageUsuario.estiloCurtido}" id="listaCurte" />
+				 
+				 
+				 
+				 
+				<br></br><br></br>
+				
 				<p:commandButton class="botao" action="#{manageUsuario.salvar}" validateClient="true" ajax="false" icon="ui-icon-check" value="Salvar" />
 				
 				<p:commandButton class="botao" action="#{manageUsuario.retornar}" value="Voltar" />
+				
+				<br></br><br></br>
 			</h:form>
 		</div>
 

@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 public abstract class BaseJPADAO<T extends Serializable> implements BaseDAO<T> {
 
@@ -27,28 +25,30 @@ public abstract class BaseJPADAO<T extends Serializable> implements BaseDAO<T> {
 		return (T) em.find(getDomainClass(), id);
 	}
 
+	
 	@Override
-	public List<T> listar() {
-		EntityManager em = getEntityManager();
-		CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-		cq.select(cq.from(getDomainClass()));
-		return em.createQuery(cq).getResultList();
-	}
-
+	@SuppressWarnings("unchecked")
+	public List<T> listar(){
+		Query q = getEntityManager()
+					.createQuery(
+							"SELECT t FROM " + getDomainClass().getSimpleName()
+									+ " t ");
+			return q.getResultList();		
+	}	
+	
 	@Override
 	public void excluir(Long id) {
 		T obj = this.obter(id);
 		getEntityManager().remove(obj);		
 	}
-
+	
 	@Override
-	public long retornaTotal() {
-		EntityManager em = getEntityManager();
-		CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-		Root<T> rt = cq.from(getDomainClass());
-		cq.select(em.getCriteriaBuilder().count(rt));
-		Query q = em.createQuery(cq);
-		return ((Long) q.getSingleResult()).longValue();
+	public T buscaPorNome (String nome){
+		Query q = getEntityManager().createQuery(
+					"SELECT a FROM " + getDomainClass().getSimpleName() + "a WHERE a.nome = " + nome
+				);
+				
+		return (T) q.getSingleResult();
 	}
 
 }

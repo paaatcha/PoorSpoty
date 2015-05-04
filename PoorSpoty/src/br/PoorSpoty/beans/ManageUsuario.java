@@ -1,15 +1,22 @@
 package br.PoorSpoty.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
+
+import br.PoorSpoty.domain.Banda;
+import br.PoorSpoty.domain.EstiloMusical;
 import br.PoorSpoty.domain.Usuario;
 import br.PoorSpoty.persistence.BandaDAO;
+import br.PoorSpoty.persistence.EstiloMusicalDAO;
 import br.PoorSpoty.persistence.UsuarioDAO;
 
 @ManagedBean
@@ -24,9 +31,18 @@ public class ManageUsuario implements Serializable{
 	@EJB
 	UsuarioDAO usuarioDAO;
 	
+	@EJB
+	EstiloMusicalDAO estiloMusicalDAO;	
+	private List<EstiloMusical> estilos;	
+	
+	
 	DataModel<Usuario> usuarios;
+	String estiloCurtido;	
+	private List<String> estilosCurtidos = new ArrayList<String>();
 	
 	Usuario usuario;
+	
+	
 	
 	public Usuario getUsuario() {
 		return usuario;
@@ -35,6 +51,12 @@ public class ManageUsuario implements Serializable{
 		this.usuario = usuario;
 	}
 	
+	public String getEstiloCurtido() {
+		return estiloCurtido;
+	}
+	public void setEstiloCurtido(String estiloCurtido) {
+		this.estiloCurtido = estiloCurtido;
+	}
 	public DataModel<Usuario> getUsuarios(){
 		try {
 			this.usuarios = new ListDataModel<Usuario>(usuarioDAO.listar());
@@ -75,4 +97,26 @@ public class ManageUsuario implements Serializable{
 	public String retornar (){
 		return "/manageUsuario/listar_usuarios";
 	}	
+	
+	public List<String> completaNome (String query){
+		this.estilos = new ArrayList<EstiloMusical>();
+		List<String> sugestao = new ArrayList<String>();
+		try{
+			this.estilos = this.estiloMusicalDAO.listar();			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		for (EstiloMusical m : this.estilos){
+			 if (m.getNome().startsWith(query)){
+				 sugestao.add(m.getNome());
+			 }
+		}		
+		return sugestao;
+	}	
+	
+	public void inserirEstiloCurtido (AjaxBehaviorEvent event){
+		estilosCurtidos.add(estiloCurtido);
+	}
+
 }

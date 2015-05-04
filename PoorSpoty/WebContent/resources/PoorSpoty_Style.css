@@ -414,6 +414,13 @@ a img{
 	padding-bottom: 10px;
 }
 
+.boxManage h2{
+	font-family: PoorSpoty;
+	font-size: 20px;
+	font-weight: bold;	
+	color: #669900;	
+}
+
 .formCadsBanEst button{
 	width: 200px;
 	display: block;
