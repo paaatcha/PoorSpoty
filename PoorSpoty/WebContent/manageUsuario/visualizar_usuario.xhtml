@@ -183,6 +183,40 @@
 						</p:column>					
 					</p:dataTable>
     			</p:overlayPanel> 
+				
+				<p> Bandas que você adora*: </p>
+				 <p:autoComplete id="bandas" value="#{manageUsuario.banda}" 
+				 completeMethod="#{manageUsuario.completaNomeBanda}" 
+				 required="true"
+				 requiredMessage="Você deve escolher pelo menos 1 banda"
+				 >
+					<p:ajax event="itemSelect" listener="#{manageUsuario.onItemSelect}" update="msgs tabelaBandas"/>
+				</p:autoComplete>
+				
+				<h:commandLink value="Limpar" action="#{manageUsuario.inserirBandas}">
+				 	<p:ajax update="bandas" resetValues="true" />				 			 
+				 </h:commandLink>
+				 
+				<p:commandButton class="botao" id="bandasBtn" value="Ver bandas" type="button" />
+    			<p:overlayPanel id="bandasPanel" for="bandasBtn" hideEffect="fade" dynamic="true" style="width:300px">
+			       	<p:dataTable id="tabelaBandas"
+					value="#{manageUsuario.bandas}" var="banda">
+						<p:column headerText="Bandas">
+							<h:outputText value="#{banda}" />
+						</p:column>	
+						
+						<p:column headerText="">
+							<h:form>										
+								<p:commandButton action="#{manageUsuario.excluirBandas}" icon="ui-icon-trash" title="Excluir" update="@all" process="@this" >
+      								<f:setPropertyActionListener
+             							target="#{manageUsuario.banda}"
+             							value="#{banda}" />             						
+								</p:commandButton>								
+							</h:form>
+						</p:column>					
+					</p:dataTable>
+    			</p:overlayPanel>
+				
 				 
 				<br></br><br></br>
 				

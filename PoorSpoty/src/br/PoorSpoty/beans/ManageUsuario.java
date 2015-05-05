@@ -43,6 +43,7 @@ public class ManageUsuario implements Serializable{
 	
 	@EJB
 	BandaDAO bandaDAO;
+	private List<Banda> bandasAll;
 	private List<Banda> bandasPersistir;
 	
 	private String estiloCurtido = new String();	
@@ -90,8 +91,6 @@ public class ManageUsuario implements Serializable{
 		this.estilosNaoCurtidos = estilosNaoCurtidos;
 	}
 		
-	// ################### FIM GETTERS E SETTERS ###################
-	
 	public List<EstiloMusical> getEstilos() {
 		return estilos;
 	}
@@ -117,6 +116,22 @@ public class ManageUsuario implements Serializable{
 	public void setBandasPersistir(List<Banda> bandasPersistir) {
 		this.bandasPersistir = bandasPersistir;
 	}
+	
+	public String getBanda() {
+		return banda;
+	}
+	public void setBanda(String banda) {
+		this.banda = banda;
+	}
+	
+	public List<String> getBandas() {
+		return bandas;
+	}
+	public void setBandas(List<String> bandas) {
+		this.bandas = bandas;
+	}
+	// ################### FIM GETTERS E SETTERS ###################
+	
 	public DataModel<Usuario> getUsuarios(){
 		try {
 			this.usuarios = new ListDataModel<Usuario>(usuarioDAO.listar());
@@ -173,7 +188,33 @@ public class ManageUsuario implements Serializable{
 			 }
 		}		
 		return sugestao;
+	}
+	
+	public List<String> completaNomeBanda (String query){
+		this.bandasAll = new ArrayList<Banda>();
+		List<String> sugestao = new ArrayList<String>();
+		try{
+			this.bandasAll = this.bandaDAO.listar();			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		for (Banda b : this.bandasAll){
+			 if (b.getNome().startsWith(query)){
+				 sugestao.add(b.getNome());
+			 }
+		}		
+		return sugestao;
 	}	
+	
+	public void inserirBandas (){
+		bandas.add(banda);		
+		banda = new String();				
+	}
+	
+	public void excluirBandas (){
+		bandas.remove(this.banda);
+	}
 	
 	public void inserirEstiloCurtido (){
 		//System.out.println(estiloCurtido);
@@ -184,8 +225,7 @@ public class ManageUsuario implements Serializable{
   
         //}  
 		estilosCurtidos.add(estiloCurtido);		
-		estiloCurtido = new String();
-				
+		estiloCurtido = new String();				
 	}
 	
 	public void excluirEstiloCurtido (){
