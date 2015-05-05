@@ -48,12 +48,12 @@ public class ManageEstiloMusical implements Serializable {
 	
 	public String adicionar(){
 		this.estiloMusical = new EstiloMusical();
-		return "/manageEstiloMusical/visualizar_estilo";
+		return "/manage/manageEstiloMusical/cadastrar_estilo";
 	}
 	
 	public String alterar(){
 		this.estiloMusical = (EstiloMusical) (this.estilosMusicais.getRowData());
-		return "/manageEstiloMusical/visualizar_estilo";
+		return "/manage/manageEstiloMusical/cadastrar_estilo";
 	}
 	
 	public String salvar(){
@@ -62,7 +62,7 @@ public class ManageEstiloMusical implements Serializable {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return "/manageEstiloMusical/listar_estilos";
+		return "/manage/manageEstiloMusical/listar_estilos";
 	}
 		
 	public void excluir(){

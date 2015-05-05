@@ -74,13 +74,13 @@ public class ManageBanda implements Serializable{
 	
 	public String adicionar(){
 		this.banda = new Banda();
-		return "/manageBanda/visualizar_banda"; 
+		return "/manage/manageBanda/cadastrar_banda"; 
 	}
 	
 	public String alterar(){
 		this.banda = (Banda)(this.bandas.getRowData());
 		this.estilo = this.banda.getEstilo().getId();
-		return "/manageBanda/visualizar_banda"; 
+		return "/manage/manageBanda/cadastrar_banda"; 
 	}
 		
 	public String salvar(){
@@ -90,7 +90,7 @@ public class ManageBanda implements Serializable{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return  "/manageBanda/listar_bandas"; 
+		return  "/manage/manageBanda/listar_bandas"; 
 	}
 		
 	public void excluir(){

@@ -123,7 +123,7 @@ public class ManageUsuario implements Serializable{
 	
 	public String adicionar (){	
 		this.usuario = new Usuario ();
-		return "/manageUsuario/visualizar_usuario";
+		return "/manage/manageUsuario/cadastrar_usuario";
 	}
 	
 	public String salvar (){
@@ -136,7 +136,7 @@ public class ManageUsuario implements Serializable{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return "/manageUsuario/listar_usuarios";
+		return "/manage/manageUsuario/listar_usuarios";
 	}
 	
 	public void excluir(){
@@ -150,12 +150,8 @@ public class ManageUsuario implements Serializable{
 	
 	public String alterar(){
 		this.usuario = (Usuario) (this.usuarios.getRowData());
-		return "/manageUsuario/visualizar_usuario";
+		return "/manage/manageUsuario/cadastrar_usuario";
 	}
-	
-	public String retornar (){
-		return "/manageUsuario/listar_usuarios";
-	}	
 	
 	public List<String> completaNome (String query){
 		query = query.toUpperCase();
