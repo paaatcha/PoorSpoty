@@ -29,18 +29,24 @@
 	<ui:define name="principalUsuario">
 		<div class="boxManage">
 			<h:form class="formLogin">
+				<p:messages autoUpdate="true"/>
+			
 				<p> Nome: </p> 
-				<p:inputText value="#{manageBanda.banda.nome}" />
+				<p:inputText value="#{manageBanda.banda.nome}" 
+				required="true"
+				requiredMessage="Digite uma banda"
+				/>
 				
 				<p> Estilo Musical: </p>
-				 <p:selectOneMenu value="#{manageBanda.estilo}">
+				 <p:selectOneMenu value="#{manageBanda.estilo}"
+				  required="true"
+				  requiredMessage="Escolha um estilo">
 					<f:selectItems value="#{manageBanda.estilos}" />
 				</p:selectOneMenu>			
 				
 				<br></br><br></br>
-				<p:commandButton class="botao" action="#{manageBanda.salvar}" value="salvar" />
+				<p:commandButton class="botao" action="#{manageBanda.salvar}" value="salvar" icon="ui-icon-check"/>				
 				
-				<p:commandButton class="botao" action="listar_bandas" value="Voltar" />
 			</h:form>
 		</div>
 

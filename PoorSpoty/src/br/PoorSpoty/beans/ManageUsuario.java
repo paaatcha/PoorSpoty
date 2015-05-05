@@ -158,6 +158,7 @@ public class ManageUsuario implements Serializable{
 	}	
 	
 	public List<String> completaNome (String query){
+		query = query.toUpperCase();
 		this.estilos = new ArrayList<EstiloMusical>();
 		List<String> sugestao = new ArrayList<String>();
 		try{
@@ -175,6 +176,7 @@ public class ManageUsuario implements Serializable{
 	}
 	
 	public List<String> completaNomeBanda (String query){
+		query = query.toUpperCase();
 		this.bandasAll = new ArrayList<Banda>();
 		List<String> sugestao = new ArrayList<String>();
 		try{

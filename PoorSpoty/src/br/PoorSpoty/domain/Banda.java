@@ -35,6 +35,7 @@ public class Banda implements Serializable{
 	}
 
 	public void setNome(String nome) {
+		nome = nome.toUpperCase();
 		this.nome = nome;
 	}
 

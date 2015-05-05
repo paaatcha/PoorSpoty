@@ -31,13 +31,17 @@
 	
 		<div class="boxManage">
 			<h:form class="formLogin">
+				<p:messages autoUpdate="true"/>
 				<p> Nome: </p> 
-				<p:inputText value="#{manageEstiloMusical.estiloMusical.nome}" />
+				<p:inputText value="#{manageEstiloMusical.estiloMusical.nome}" 
+				 required="true"
+				 requiredMessage="Digite um estilo"
+				/>
 				
 				<br></br><br></br>
-				<p:commandButton class="botao" action="#{manageEstiloMusical.salvar}" value="Salvar" />
+				<p:commandButton class="botao" action="#{manageEstiloMusical.salvar}" value="Salvar" icon="ui-icon-check" />
 				
-				<p:commandButton class="botao" action="listar_estilos" value="Voltar" />
+				
 			</h:form>
 		</div>
 
