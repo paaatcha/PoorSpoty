@@ -111,7 +111,7 @@
 				
 				<p> Faça uma breve descrição para seu perfil:  </p>        		
       			<p:inputTextarea value="#{manageUsuario.usuario.descricao}" styleClass="boxDecricao"/>				
-				<br></br><br></br>
+				<br></br><br></br>  
 				
 				<h2> Preferências musicais: </h2>
 				<p:growl id="msgs" showDetail="true" />				
@@ -119,14 +119,12 @@
 				
 				<p> Estilos musicais que você curte*: </p>
 				 <p:autoComplete id="estiloCurti" value="#{manageUsuario.estiloCurtido}" 
-				 completeMethod="#{manageUsuario.completaNome}" 
-				 required="true"
-				 requiredMessage="Você deve escolher pelo menos 1 estilo que curte"
+				 completeMethod="#{manageUsuario.completaNome}" 				 
 				 >
 					<p:ajax event="itemSelect" listener="#{manageUsuario.onItemSelect}" update="msgs tabelaEstiloCurtido"/>
 				</p:autoComplete>				
 				 
-				 <h:commandLink value="Limpar" action="#{manageUsuario.inserirEstiloCurtido}">
+				 <h:commandLink value="Adicionar" action="#{manageUsuario.inserirEstiloCurtido}">
 				 	<p:ajax update="estiloCurti" resetValues="true" />				 			 
 				 </h:commandLink>		 				
 				
@@ -154,13 +152,11 @@
 				<p> Estilos musicais que você NÃO curte*: </p>
 				 <p:autoComplete id="estiloNaoCurti" value="#{manageUsuario.estiloNaoCurtido}" 
 				 completeMethod="#{manageUsuario.completaNome}" 
-				 required="true"
-				 requiredMessage="Você deve escolher pelo menos 1 estilo que NÃO curte"
 				 >
 					<p:ajax event="itemSelect" listener="#{manageUsuario.onItemSelect}" update="msgs tabelaEstiloNaoCurtido"/>
 				</p:autoComplete> 
 				
-				<h:commandLink value="Limpar" action="#{manageUsuario.inserirEstiloNaoCurtido}">
+				<h:commandLink value="Adicionar" action="#{manageUsuario.inserirEstiloNaoCurtido}">
 				 	<p:ajax update="estiloNaoCurti" resetValues="true" />				 			 
 				 </h:commandLink>
 				 
@@ -186,14 +182,12 @@
 				
 				<p> Bandas que você adora*: </p>
 				 <p:autoComplete id="bandas" value="#{manageUsuario.banda}" 
-				 completeMethod="#{manageUsuario.completaNomeBanda}" 
-				 required="true"
-				 requiredMessage="Você deve escolher pelo menos 1 banda"
+				 completeMethod="#{manageUsuario.completaNomeBanda}" 				 
 				 >
 					<p:ajax event="itemSelect" listener="#{manageUsuario.onItemSelect}" update="msgs tabelaBandas"/>
 				</p:autoComplete>
 				
-				<h:commandLink value="Limpar" action="#{manageUsuario.inserirBandas}">
+				<h:commandLink value="Adicionar" action="#{manageUsuario.inserirBandas}">
 				 	<p:ajax update="bandas" resetValues="true" />				 			 
 				 </h:commandLink>
 				 

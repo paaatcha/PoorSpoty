@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -19,8 +21,20 @@ public class Banda implements Serializable{
 	
 	private String nome;
 	
+	@ManyToOne
+	@JoinColumn(name="bandas")
+	private Usuario usuarioBanda;
+	
 	@OneToOne
 	private EstiloMusical estilo;
+		
+	public Usuario getUsuarioBanda() {
+		return usuarioBanda;
+	}
+
+	public void setUsuarioBanda(Usuario usuarioBanda) {
+		this.usuarioBanda = usuarioBanda;
+	}
 
 	public Long getId() {
 		return id;
@@ -47,5 +61,10 @@ public class Banda implements Serializable{
 		this.estilo = estilo;
 	}
 	
+	public void printBanda (){
+		System.out.print("Banda 1:\n");
+		System.out.print(this.id+" ");
+		System.out.print(this.nome+"\n");
+	}
 	
 }

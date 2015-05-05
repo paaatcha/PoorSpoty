@@ -2,11 +2,9 @@ package br.PoorSpoty.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-
-import java.util.ArrayList;
 import java.util.List;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.jboss.resteasy.spi.touri.MappedBy;
 
 
 @Entity
@@ -34,13 +34,13 @@ public class Usuario implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date dataNasc;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioBanda")		
 	private List<Banda> bandas;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")	
 	private List<EstiloMusical> estilos;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")	
 	private List<EstiloMusical> estilosNao;
 
 	public Long getId() {

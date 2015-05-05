@@ -9,107 +9,209 @@
       
       <ui:define name="title">Cadastro</ui:define>      
       <ui:define name="login">
-      	 <h:form class="formLogin">      	   	 
-      	 	<p> <span> Dados Pessoais: </span> </p>
-
-		    
-		    	
-		    	<p> Nome* :</p>        		
-      			<p:inputText value="" size="30" id="nome" required="true" />
-      			
-      			<p> Sobrenome* :</p> 
-      			<p:inputText value="" size="30" id="sobrenome" required="true" />
-		    			    		
-		    	<p> Data de nascimento* :</p>
-        		<p:inputMask id="data_nasc" value="#{maskView.date}" mask="99/99/9999" required="true"/>        		      			    			    	
-		    	   	
-		    	<p> Sexo* : </p>		    	
-				<p:selectOneRadio value="" id="sexo" required="true">
+      	 <h:form class="formLogin">
+				<h2> Informações pessoais: </h2>
+				<br></br><br></br>
+				
+				<p:messages autoUpdate="true"/>
+			
+				<p> Nome* : </p> 
+				<p:inputText size="30" id="nome" value="#{manageUsuario.usuario.nome}" 
+				required="true" 
+				requiredMessage="Seu nome não foi informado."				
+				/>
+				<br></br>
+				<p:message for="nome" />
+            	<h:outputText value="#{manageUsuario.usuario.nome}" /> 							
+				
+				
+				<p> Sobrenome: </p> 
+				<p:inputText size="30" value="#{manageUsuario.usuario.sobrenome}"				
+				/>
+				
+				
+				<p> Email* : </p> 
+				<p:inputText size="30" id="email" value="#{manageUsuario.usuario.email}" 
+				required="true"
+				requiredMessage="Seu email não foi informado."
+				validatorMessage="Seu e-mail não está no formato correto"
+				>				
+					<f:validateRegex
+					pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				
+				</p:inputText>
+				<p:message for="email" />
+            	<h:outputText value="#{manageUsuario.usuario.email}" />
+				
+				
+				<p> Sexo* : </p>				
+				<p:selectOneRadio id="sexo" value="#{manageUsuario.usuario.sexo}" 
+				required="true" requiredMessage="Seu sexo não foi informado.">
       				<f:selectItem itemLabel="Feminino" itemValue="F"/>
       				<f:selectItem itemLabel="Masculino" itemValue="M"/>	      		
-      			</p:selectOneRadio>	      				
+      			</p:selectOneRadio>
+											
 				
-				<p> E-mail* :</p>
-				<p:inputText value="" size="30" id="email" required="true" validatorMessage="Formato de email inválido">
-      			 <f:validateRegex
-					pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-				 <h:message for="email"/>
-      			</p:inputText>
-      			
-      			
-      			<p> Nick para login* :</p>
-      			<p:inputText value="" size="30" id="nick"  required="true" validatorMessage="O nick deve conter apenas caracters ecaracter e/ou números. O tamanho máximo é 16 caracters">
-      				<f:validateRegex pattern="[a-z][1-9]{16}"/> 
-      				<h:message for="nick"/>
-      			</p:inputText>
-      							
-      			      			  			
-      			<p> Senha* :</p>
-        		<p:password id="senha1" size="30" value="" match="senha2" label="senha_1" required="true" />
- 
-        		<p> Repita a senha* :</p>
-        		<p:password id="senha2" size="30" value="" label="senha_2" required="true" />  
-        		
-        	
-        		
-			<p:spacer height="10" /> 
-    		<p:separator />
-    		<p:spacer height="10" />
-    		<p> <span> Preferências: </span> </p>          		
-        		
-        	
-        		<p> Banda preferida 1* :</p>
-        		<p:inputText value="" size="30" id="banda1" required="true" />
-        		
-        		<p> Banda preferida 2 :</p>
-        		<p:inputText value="" size="30" id="banda2" />
-      		
-      			<!--  tEM UM JEITO MUITO MELHOR DE FAZER, MAS TEM QUE IMPLEMENTAR AS BEANS -->
-      			<p> Estilos musicais que você curte* :</p>
-        		<h:selectManyCheckbox id="estilos_curte" value="" layout="pageDirection" required="true">
-            		<f:selectItem itemValue="Rock"/>      			
-	      			<f:selectItem itemValue="Heavy Metal"/>      			
-	      			<f:selectItem itemValue="Pagode"/>
-	      			<f:selectItem itemValue="Samba"/>
-	      			<f:selectItem itemValue="Axé"/>
-	      			<f:selectItem itemValue="Pop"/>
-	      			<f:selectItem itemValue="Eletrônica"/>
-	      			<f:selectItem itemValue="Forró"/>
-	      			<f:selectItem itemValue="Reggae"/>
-	      			<f:selectItem itemValue="Classica"/>
-	      			<f:selectItem itemValue="Jazz"/>
-	      			<f:selectItem itemValue="MPB"/>
-	      			<f:selectItem itemValue="Bossa Nova"/>
-	      			<f:selectItem itemValue="Funk"/>
-	      			<f:selectItem itemValue="Sertanejo"/> 
-        		</h:selectManyCheckbox>
-        		
-        		        		
-        		<p> Estilos musicais que você NÃO curte* :</p>
-        		<h:selectManyCheckbox id="estilos_nao_curte" value="" layout="pageDirection" required="true">
-            		<f:selectItem itemValue="Rock"/>      			
-	      			<f:selectItem itemValue="Heavy Metal"/>      			
-	      			<f:selectItem itemValue="Pagode"/>
-	      			<f:selectItem itemValue="Samba"/>
-	      			<f:selectItem itemValue="Axé"/>
-	      			<f:selectItem itemValue="Pop"/>
-	      			<f:selectItem itemValue="Eletrônica"/>
-	      			<f:selectItem itemValue="Forró"/>
-	      			<f:selectItem itemValue="Reggae"/>
-	      			<f:selectItem itemValue="Classica"/>
-	      			<f:selectItem itemValue="Jazz"/>
-	      			<f:selectItem itemValue="MPB"/>
-	      			<f:selectItem itemValue="Bossa Nova"/>
-	      			<f:selectItem itemValue="Funk"/>
-	      			<f:selectItem itemValue="Sertanejo"/> 
-        		</h:selectManyCheckbox>
-        		
-        		<p> Faça uma breve descrição para seu perfil:  </p>        		
-      			<p:inputTextarea value="" id="descricao_pessoal" styleClass="boxDecricao"/>	       		
-        		
-        		<p:commandButton value="Enviar" id="botao_enviar" class="botao"  />     	
-
-      	</h:form>      	
+				<p> Data de nascimento* :</p>
+        		<p:inputMask id="dataNasc" value="#{manageUsuario.usuario.dataNasc}" mask="99/99/9999" 
+        		required="true"
+        		requiredMessage="Sua data de nascimento não foi informada."
+        		>
+        			<f:convertDateTime pattern="dd/MM/yyyy" />
+        		</p:inputMask>
+				<p:message for="dataNasc" />
+            	<h:outputText value="#{manageUsuario.usuario.dataNasc}" />
+				
+				
+				<p> Nick para login* : </p> 
+				<p:inputText size="30" id="nick" value="#{manageUsuario.usuario.nick}" 
+				required="true"
+				requiredMessage="Seu nick não foi informado."
+				validatorMessage="Seu nick deve conter apenas letras e/ou numeros num total de 1 a 20 caracters"
+				>				
+					<f:validateRegex pattern="[\w]{1,20}" />
+				
+				</p:inputText>
+				<p:message for="nick" />
+            	<h:outputText value="#{manageUsuario.usuario.nick}" />
+            	
+            	<p> Senha* :</p>
+            	<p:password id="senha1" value="#{manageUsuario.usuario.senha}" feedback="true"
+                    promptLabel="Força da senha" weakLabel="Fraca"
+                    goodLabel="Média" strongLabel="Forte" 
+                    match="senha2"
+                    required="true"
+                    requiredMessage="Sua senha 1 não foi informada."
+                    validatorMessage="A senha 1 não é igual a senha 2."
+                    />
+            	<p:message for="senha1" />
+            	<h:outputText value="#{manageUsuario.usuario.senha}" />
+            	
+            	 
+        		<p> Repita a senha anterior* :</p>
+        		<p:password id="senha2" value="#{manageUsuario.usuario.senha}" 
+                    required="true"
+                    requiredMessage="Sua senha 1 não foi informada."                    
+                    />
+                    
+				
+				<p> Faça uma breve descrição para seu perfil:  </p>        		
+      			<p:inputTextarea value="#{manageUsuario.usuario.descricao}" styleClass="boxDecricao"/>				
+				<br></br><br></br>
+				
+				<h2> Preferências musicais: </h2>
+				<p:growl id="msgs" showDetail="true" />				
+				<br></br><br></br>
+				
+				<p> Estilos musicais que você curte*: </p>
+				 <p:autoComplete id="estiloCurti" value="#{manageUsuario.estiloCurtido}" 
+				 completeMethod="#{manageUsuario.completaNome}" 
+				 required="true"
+				 requiredMessage="Você deve escolher pelo menos 1 estilo que curte"
+				 >
+					<p:ajax event="itemSelect" listener="#{manageUsuario.onItemSelect}" update="msgs tabelaEstiloCurtido"/>
+				</p:autoComplete>				
+				 
+				 <h:commandLink value="Limpar" action="#{manageUsuario.inserirEstiloCurtido}">
+				 	<p:ajax update="estiloCurti" resetValues="true" />				 			 
+				 </h:commandLink>		 				
+				
+				<p:commandButton class="botao" id="estiloCurtiBtn" value="Ver estilos" type="button" />
+    			<p:overlayPanel id="estiloCurtiPanel" for="estiloCurtiBtn" hideEffect="fade" dynamic="true" style="width:300px">
+			       	<p:dataTable id="tabelaEstiloCurtido"
+					value="#{manageUsuario.estilosCurtidos}" var="estiloCurtido">
+						<p:column headerText="Estilos">
+							<h:outputText value="#{estiloCurtido}" />
+						</p:column>	
+						
+						<p:column headerText="">
+							<h:form>										
+								<p:commandButton action="#{manageUsuario.excluirEstiloCurtido}" icon="ui-icon-trash" title="Excluir" update="@all" process="@this" >
+      								<f:setPropertyActionListener
+             							target="#{manageUsuario.estiloCurtido}"
+             							value="#{estiloCurtido}" />             						
+								</p:commandButton>								
+							</h:form>
+						</p:column>					
+					</p:dataTable>
+    			</p:overlayPanel>
+    			
+				
+				<p> Estilos musicais que você NÃO curte*: </p>
+				 <p:autoComplete id="estiloNaoCurti" value="#{manageUsuario.estiloNaoCurtido}" 
+				 completeMethod="#{manageUsuario.completaNome}" 
+				 required="true"
+				 requiredMessage="Você deve escolher pelo menos 1 estilo que NÃO curte"
+				 >
+					<p:ajax event="itemSelect" listener="#{manageUsuario.onItemSelect}" update="msgs tabelaEstiloNaoCurtido"/>
+				</p:autoComplete> 
+				
+				<h:commandLink value="Limpar" action="#{manageUsuario.inserirEstiloNaoCurtido}">
+				 	<p:ajax update="estiloNaoCurti" resetValues="true" />				 			 
+				 </h:commandLink>
+				 
+				<p:commandButton class="botao" id="estiloNaoCurtiBtn" value="Ver estilos" type="button" />
+    			<p:overlayPanel id="estiloNaoCurtiPanel" for="estiloNaoCurtiBtn" hideEffect="fade" dynamic="true" style="width:300px">
+			       	<p:dataTable id="tabelaEstiloNaoCurtido"
+					value="#{manageUsuario.estilosNaoCurtidos}" var="estiloNaoCurtido">
+						<p:column headerText="Estilos">
+							<h:outputText value="#{estiloNaoCurtido}" />
+						</p:column>	
+						
+						<p:column headerText="">
+							<h:form>										
+								<p:commandButton action="#{manageUsuario.excluirEstiloNaoCurtido}" icon="ui-icon-trash" title="Excluir" update="@all" process="@this" >
+      								<f:setPropertyActionListener
+             							target="#{manageUsuario.estiloNaoCurtido}"
+             							value="#{estiloNaoCurtido}" />             						
+								</p:commandButton>								
+							</h:form>
+						</p:column>					
+					</p:dataTable>
+    			</p:overlayPanel> 
+				
+				<p> Bandas que você adora*: </p>
+				 <p:autoComplete id="bandas" value="#{manageUsuario.banda}" 
+				 completeMethod="#{manageUsuario.completaNomeBanda}" 
+				 required="true"
+				 requiredMessage="Você deve escolher pelo menos 1 banda"
+				 >
+					<p:ajax event="itemSelect" listener="#{manageUsuario.onItemSelect}" update="msgs tabelaBandas"/>
+				</p:autoComplete>
+				
+				<h:commandLink value="Limpar" action="#{manageUsuario.inserirBandas}">
+				 	<p:ajax update="bandas" resetValues="true" />				 			 
+				 </h:commandLink>
+				 
+				<p:commandButton class="botao" id="bandasBtn" value="Ver bandas" type="button" />
+    			<p:overlayPanel id="bandasPanel" for="bandasBtn" hideEffect="fade" dynamic="true" style="width:300px">
+			       	<p:dataTable id="tabelaBandas"
+					value="#{manageUsuario.bandas}" var="banda">
+						<p:column headerText="Bandas">
+							<h:outputText value="#{banda}" />
+						</p:column>	
+						
+						<p:column headerText="">
+							<h:form>										
+								<p:commandButton action="#{manageUsuario.excluirBandas}" icon="ui-icon-trash" title="Excluir" update="@all" process="@this" >
+      								<f:setPropertyActionListener
+             							target="#{manageUsuario.banda}"
+             							value="#{banda}" />             						
+								</p:commandButton>								
+							</h:form>
+						</p:column>					
+					</p:dataTable>
+    			</p:overlayPanel>
+				
+				 
+				<br></br><br></br>
+				
+				<p:commandButton class="botao" action="#{manageUsuario.salvar}" validateClient="true" ajax="false" icon="ui-icon-check" value="Salvar" />
+				
+				
+				
+				<br></br><br></br>
+			</h:form>    	
       </ui:define>
       
       

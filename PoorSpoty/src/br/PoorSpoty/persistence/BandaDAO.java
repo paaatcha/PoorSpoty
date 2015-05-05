@@ -3,9 +3,10 @@ package br.PoorSpoty.persistence;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import br.PoorSpoty.domain.Banda;
+import br.PoorSpoty.domain.EstiloMusical;
 
 @Stateless
 public class BandaDAO extends BaseJPADAO<Banda> {
@@ -24,11 +25,11 @@ public class BandaDAO extends BaseJPADAO<Banda> {
 	}
 		
 	public Banda buscaPorNome (String nome){
-		Query q = getEntityManager().createQuery(
-					"SELECT t FROM banda t WHERE t.nome = " + nome
-				);
-				
-		return (Banda)q.getSingleResult();
+		TypedQuery<Banda> q = em.createQuery(
+					"SELECT b FROM Banda AS b WHERE b.nome = '" + nome +"'", 
+					Banda.class);
+		
+		return q.getSingleResult();
 	}	
 
 }
