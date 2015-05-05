@@ -113,27 +113,82 @@
       			<p:inputTextarea value="#{manageUsuario.usuario.descricao}" styleClass="boxDecricao"/>				
 				<br></br><br></br>
 				
-				<h2> Preferências musicais: </h2>				
+				<h2> Preferências musicais: </h2>
+				<p:growl id="msgs" showDetail="true" />				
 				<br></br><br></br>
+				
 				<p> Estilos musicais que você curte*: </p>
-				 <p:autoComplete id="estiloCurte" value="#{manageUsuario.estiloCurtido}" 
+				 <p:autoComplete id="estiloCurti" value="#{manageUsuario.estiloCurtido}" 
 				 completeMethod="#{manageUsuario.completaNome}" 
 				 required="true"
 				 requiredMessage="Você deve escolher pelo menos 1 estilo que curte"
 				 >
-				 	<f:ajax event="select" render="listaCurti" listener="#{manageUsuario.inserirEstiloCurtido}" />
-				 </p:autoComplete>
-				             	 
-				 <h:outputText value="#{manageUsuario.estiloCurtido}" id="listaCurte" />
+					<p:ajax event="itemSelect" listener="#{manageUsuario.onItemSelect}" update="msgs tabelaEstiloCurtido"/>
+				</p:autoComplete>				
 				 
+				 <h:commandLink value="Limpar" action="#{manageUsuario.inserirEstiloCurtido}">
+				 	<p:ajax update="estiloCurti" resetValues="true" />				 			 
+				 </h:commandLink>		 				
+				
+				<p:commandButton class="botao" id="estiloCurtiBtn" value="Ver estilos" type="button" />
+    			<p:overlayPanel id="estiloCurtiPanel" for="estiloCurtiBtn" hideEffect="fade" dynamic="true" style="width:300px">
+			       	<p:dataTable id="tabelaEstiloCurtido"
+					value="#{manageUsuario.estilosCurtidos}" var="estiloCurtido">
+						<p:column headerText="Estilos">
+							<h:outputText value="#{estiloCurtido}" />
+						</p:column>	
+						
+						<p:column headerText="">
+							<h:form>										
+								<p:commandButton action="#{manageUsuario.excluirEstiloCurtido}" icon="ui-icon-trash" title="Excluir" update="@all" process="@this" >
+      								<f:setPropertyActionListener
+             							target="#{manageUsuario.estiloCurtido}"
+             							value="#{estiloCurtido}" />             						
+								</p:commandButton>								
+							</h:form>
+						</p:column>					
+					</p:dataTable>
+    			</p:overlayPanel>
+    			
+				
+				<p> Estilos musicais que você NÃO curte*: </p>
+				 <p:autoComplete id="estiloNaoCurti" value="#{manageUsuario.estiloNaoCurtido}" 
+				 completeMethod="#{manageUsuario.completaNome}" 
+				 required="true"
+				 requiredMessage="Você deve escolher pelo menos 1 estilo que NÃO curte"
+				 >
+					<p:ajax event="itemSelect" listener="#{manageUsuario.onItemSelect}" update="msgs tabelaEstiloNaoCurtido"/>
+				</p:autoComplete> 
+				
+				<h:commandLink value="Limpar" action="#{manageUsuario.inserirEstiloNaoCurtido}">
+				 	<p:ajax update="estiloNaoCurti" resetValues="true" />				 			 
+				 </h:commandLink>
 				 
-				 
+				<p:commandButton class="botao" id="estiloNaoCurtiBtn" value="Ver estilos" type="button" />
+    			<p:overlayPanel id="estiloNaoCurtiPanel" for="estiloNaoCurtiBtn" hideEffect="fade" dynamic="true" style="width:300px">
+			       	<p:dataTable id="tabelaEstiloNaoCurtido"
+					value="#{manageUsuario.estilosNaoCurtidos}" var="estiloNaoCurtido">
+						<p:column headerText="Estilos">
+							<h:outputText value="#{estiloNaoCurtido}" />
+						</p:column>	
+						
+						<p:column headerText="">
+							<h:form>										
+								<p:commandButton action="#{manageUsuario.excluirEstiloNaoCurtido}" icon="ui-icon-trash" title="Excluir" update="@all" process="@this" >
+      								<f:setPropertyActionListener
+             							target="#{manageUsuario.estiloNaoCurtido}"
+             							value="#{estiloNaoCurtido}" />             						
+								</p:commandButton>								
+							</h:form>
+						</p:column>					
+					</p:dataTable>
+    			</p:overlayPanel> 
 				 
 				<br></br><br></br>
 				
 				<p:commandButton class="botao" action="#{manageUsuario.salvar}" validateClient="true" ajax="false" icon="ui-icon-check" value="Salvar" />
 				
-				<p:commandButton class="botao" action="#{manageUsuario.retornar}" value="Voltar" />
+				<p:commandButton class="botao" action="#{manageUsuario.retornar}" icon="ui-icon-carat-1-ne" value="Voltar" />
 				
 				<br></br><br></br>
 			</h:form>

@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
+import org.primefaces.event.SelectEvent;
 
 import br.PoorSpoty.domain.Banda;
 import br.PoorSpoty.domain.EstiloMusical;
@@ -30,19 +32,29 @@ public class ManageUsuario implements Serializable{
 	
 	@EJB
 	UsuarioDAO usuarioDAO;
-	
-	@EJB
-	EstiloMusicalDAO estiloMusicalDAO;	
-	private List<EstiloMusical> estilos;	
-	
-	
 	DataModel<Usuario> usuarios;
-	String estiloCurtido;	
-	private List<String> estilosCurtidos = new ArrayList<String>();
-	
 	Usuario usuario;
 	
+	@EJB
+	EstiloMusicalDAO estiloMusicalDAO;
+	private List<EstiloMusical> estilos;
+	private List<EstiloMusical> estilosCurtiPersistir;
+	private List<EstiloMusical> estilosNaoCurtiPersistir;
 	
+	@EJB
+	BandaDAO bandaDAO;
+	private List<Banda> bandasPersistir;
+	
+	private String estiloCurtido = new String();	
+	private List<String> estilosCurtidos = new ArrayList<String>();	
+	
+	private String estiloNaoCurtido = new String();	
+	private List<String> estilosNaoCurtidos = new ArrayList<String>();	
+	
+	private String banda = new String();	
+	private List<String> bandas = new ArrayList<String>();
+	
+	// ###################  INICIO GETTERS E SETTERS ###################
 	
 	public Usuario getUsuario() {
 		return usuario;
@@ -56,6 +68,54 @@ public class ManageUsuario implements Serializable{
 	}
 	public void setEstiloCurtido(String estiloCurtido) {
 		this.estiloCurtido = estiloCurtido;
+	}			
+
+	public List<String> getEstilosCurtidos() {
+		return estilosCurtidos;
+	}
+	public void setEstilosCurtidos(List<String> estilosCurtidos) {
+		this.estilosCurtidos = estilosCurtidos;
+	}
+	
+	public String getEstiloNaoCurtido() {
+		return estiloNaoCurtido;
+	}
+	public void setEstiloNaoCurtido(String estiloNaoCurtido) {
+		this.estiloNaoCurtido = estiloNaoCurtido;
+	}
+	public List<String> getEstilosNaoCurtidos() {
+		return estilosNaoCurtidos;
+	}
+	public void setEstilosNaoCurtidos(List<String> estilosNaoCurtidos) {
+		this.estilosNaoCurtidos = estilosNaoCurtidos;
+	}
+		
+	// ################### FIM GETTERS E SETTERS ###################
+	
+	public List<EstiloMusical> getEstilos() {
+		return estilos;
+	}
+	public void setEstilos(List<EstiloMusical> estilos) {
+		this.estilos = estilos;
+	}
+	public List<EstiloMusical> getEstilosCurtiPersistir() {
+		return estilosCurtiPersistir;
+	}
+	public void setEstilosCurtiPersistir(List<EstiloMusical> estilosCurtiPersistir) {
+		this.estilosCurtiPersistir = estilosCurtiPersistir;
+	}
+	public List<EstiloMusical> getEstilosNaoCurtiPersistir() {
+		return estilosNaoCurtiPersistir;
+	}
+	public void setEstilosNaoCurtiPersistir(
+			List<EstiloMusical> estilosNaoCurtiPersistir) {
+		this.estilosNaoCurtiPersistir = estilosNaoCurtiPersistir;
+	}
+	public List<Banda> getBandasPersistir() {
+		return bandasPersistir;
+	}
+	public void setBandasPersistir(List<Banda> bandasPersistir) {
+		this.bandasPersistir = bandasPersistir;
 	}
 	public DataModel<Usuario> getUsuarios(){
 		try {
@@ -115,8 +175,35 @@ public class ManageUsuario implements Serializable{
 		return sugestao;
 	}	
 	
-	public void inserirEstiloCurtido (AjaxBehaviorEvent event){
-		estilosCurtidos.add(estiloCurtido);
+	public void inserirEstiloCurtido (){
+		//System.out.println(estiloCurtido);
+		
+		//System.out.println("comecando\n");
+		//for (int i = 0; i < estilosCurtidos.size(); i++) {  
+       //     System.out.println(estilosCurtidos.get(i));  
+  
+        //}  
+		estilosCurtidos.add(estiloCurtido);		
+		estiloCurtido = new String();
+				
 	}
+	
+	public void excluirEstiloCurtido (){
+		estilosCurtidos.remove(this.estiloCurtido);
+	}
+	
+	public void inserirEstiloNaoCurtido (){
+		estilosNaoCurtidos.add(estiloNaoCurtido);		
+		estiloNaoCurtido = new String();
+				
+	}
+	
+	public void excluirEstiloNaoCurtido (){
+		estilosNaoCurtidos.remove(this.estiloNaoCurtido);
+	}	
+	
+	public void onItemSelect(SelectEvent event) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Item selecionado", event.getObject().toString()));
+    }
 
 }

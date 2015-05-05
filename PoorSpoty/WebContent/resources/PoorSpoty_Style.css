@@ -134,6 +134,7 @@ a img{
 
 .formLogin p{
 	padding-top: 10px;
+	padding-bottom: 5px;
 	font-size: 14px;
 	font-weight: bold;
 	font-family: PoorSpoty;
@@ -165,6 +166,13 @@ a img{
 	color: #669900;
 }
 
+.formLogin a{
+	font-size: 14px;
+	font-weight: bold;
+	font-family: PoorSpoty;
+	color: #669900;
+}
+
 .labelCadastro label{
 	color: #669900;
 	font-size: 14px;
@@ -186,7 +194,8 @@ a img{
 	font-weight: bold;
 	width: 120px;
 	color: #669900;
-	font-weight: bold;	
+	font-weight: bold;
+	margin-top: 5px;	
 }
 
 .botao:hover{
