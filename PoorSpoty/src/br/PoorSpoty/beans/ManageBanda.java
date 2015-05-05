@@ -49,10 +49,6 @@ public class ManageBanda implements Serializable{
 	public void setEstilo(Long estilo) {
 		this.estilo = estilo;
 	}
-
-	
-	/*Funções marotas*/
-	//Lista de estilos
 	
 	public List<SelectItem> getEstilos(){
 		this.estilos = new ArrayList<SelectItem>();

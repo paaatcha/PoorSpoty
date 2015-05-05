@@ -1,15 +1,13 @@
 package br.PoorSpoty.beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
-import javax.faces.model.SelectItem;
+
 
 import br.PoorSpoty.domain.EstiloMusical;
 import br.PoorSpoty.persistence.EstiloMusicalDAO;

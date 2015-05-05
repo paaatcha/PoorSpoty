@@ -8,5 +8,4 @@ public interface BaseDAO<T extends Serializable> {
 	public T obter(Long id);	
 	public List<T> listar();
 	public void excluir(Long id);
-	public T buscaPorNome (String nome);
 }

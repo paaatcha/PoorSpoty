@@ -2,7 +2,10 @@ package br.PoorSpoty.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,10 +35,13 @@ public class Usuario implements Serializable{
 	private Date dataNasc;
 	
 	@OneToMany
-	private Set<Banda> bandas;
+	private List<Banda> bandas;
 	
 	@OneToMany
-	private Set<EstiloMusical> estilos;
+	private List<EstiloMusical> estilos;
+	
+	@OneToMany
+	private List<EstiloMusical> estilosNao;
 
 	public Long getId() {
 		return id;
@@ -108,23 +114,30 @@ public class Usuario implements Serializable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
-	public Set<Banda> getBandas() {
+
+	public List<Banda> getBandas() {
 		return bandas;
 	}
 
-	public void setBandas(Set<Banda> bandas) {
+	public void setBandas(List<Banda> bandas) {
 		this.bandas = bandas;
 	}
 
-	public Set<EstiloMusical> getEstilos() {
+	public List<EstiloMusical> getEstilos() {
 		return estilos;
 	}
 
-	public void setEstilos(Set<EstiloMusical> estilos) {
+	public void setEstilos(List<EstiloMusical> estilos) {
 		this.estilos = estilos;
 	}
-	
+
+	public List<EstiloMusical> getEstilosNao() {
+		return estilosNao;
+	}
+
+	public void setEstilosNao(List<EstiloMusical> estilosNao) {
+		this.estilosNao = estilosNao;
+	}	
 	
 	
 }

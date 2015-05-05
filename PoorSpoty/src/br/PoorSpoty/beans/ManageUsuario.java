@@ -38,13 +38,12 @@ public class ManageUsuario implements Serializable{
 	@EJB
 	EstiloMusicalDAO estiloMusicalDAO;
 	private List<EstiloMusical> estilos;
-	private List<EstiloMusical> estilosCurtiPersistir;
-	private List<EstiloMusical> estilosNaoCurtiPersistir;
+
 	
 	@EJB
 	BandaDAO bandaDAO;
 	private List<Banda> bandasAll;
-	private List<Banda> bandasPersistir;
+
 	
 	private String estiloCurtido = new String();	
 	private List<String> estilosCurtidos = new ArrayList<String>();	
@@ -97,26 +96,7 @@ public class ManageUsuario implements Serializable{
 	public void setEstilos(List<EstiloMusical> estilos) {
 		this.estilos = estilos;
 	}
-	public List<EstiloMusical> getEstilosCurtiPersistir() {
-		return estilosCurtiPersistir;
-	}
-	public void setEstilosCurtiPersistir(List<EstiloMusical> estilosCurtiPersistir) {
-		this.estilosCurtiPersistir = estilosCurtiPersistir;
-	}
-	public List<EstiloMusical> getEstilosNaoCurtiPersistir() {
-		return estilosNaoCurtiPersistir;
-	}
-	public void setEstilosNaoCurtiPersistir(
-			List<EstiloMusical> estilosNaoCurtiPersistir) {
-		this.estilosNaoCurtiPersistir = estilosNaoCurtiPersistir;
-	}
-	public List<Banda> getBandasPersistir() {
-		return bandasPersistir;
-	}
-	public void setBandasPersistir(List<Banda> bandasPersistir) {
-		this.bandasPersistir = bandasPersistir;
-	}
-	
+		
 	public String getBanda() {
 		return banda;
 	}
@@ -148,6 +128,10 @@ public class ManageUsuario implements Serializable{
 	
 	public String salvar (){
 		try{
+			this.usuario.setBandas(listStringToListBanda(bandas));
+			this.usuario.setEstilos(listStringToListEstilo(estilosCurtidos));
+			this.usuario.setEstilosNao(listStringToListEstilo(estilosNaoCurtidos));
+			
 			this.usuarioDAO.salvar(usuario);
 		}catch(Exception e){
 			e.printStackTrace();
@@ -208,42 +192,63 @@ public class ManageUsuario implements Serializable{
 	}	
 	
 	public void inserirBandas (){
-		bandas.add(banda);		
-		banda = new String();				
+		this.bandas.add(this.banda);		
+		this.banda = new String();				
 	}
 	
 	public void excluirBandas (){
-		bandas.remove(this.banda);
+		this.bandas.remove(this.banda);
 	}
 	
 	public void inserirEstiloCurtido (){
-		//System.out.println(estiloCurtido);
-		
-		//System.out.println("comecando\n");
-		//for (int i = 0; i < estilosCurtidos.size(); i++) {  
-       //     System.out.println(estilosCurtidos.get(i));  
-  
-        //}  
-		estilosCurtidos.add(estiloCurtido);		
-		estiloCurtido = new String();				
+		this.estilosCurtidos.add(this.estiloCurtido);		
+		this.estiloCurtido = new String();				
 	}
 	
 	public void excluirEstiloCurtido (){
-		estilosCurtidos.remove(this.estiloCurtido);
+		this.estilosCurtidos.remove(this.estiloCurtido);
 	}
 	
 	public void inserirEstiloNaoCurtido (){
-		estilosNaoCurtidos.add(estiloNaoCurtido);		
-		estiloNaoCurtido = new String();
+		this.estilosNaoCurtidos.add(this.estiloNaoCurtido);		
+		this.estiloNaoCurtido = new String();
 				
 	}
 	
 	public void excluirEstiloNaoCurtido (){
-		estilosNaoCurtidos.remove(this.estiloNaoCurtido);
+		this.estilosNaoCurtidos.remove(this.estiloNaoCurtido);
 	}	
 	
 	public void onItemSelect(SelectEvent event) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Item selecionado", event.getObject().toString()));
-    }
+    }	
+	
+	public Banda stringToBanda (String string){
+		Banda bandaAux = new Banda ();
+		bandaAux = bandaDAO.buscaPorNome(string);
+		return bandaAux;
+	}
+	
+	public List<Banda> listStringToListBanda (List<String> stringsL){
+		List<Banda> bandasL = new ArrayList<Banda>();
+		for (int i = 0; i < stringsL.size(); i++) {  
+	        bandasL.add(stringToBanda(stringsL.get(i)));	  
+	    }  
+		return bandasL;		
+	}
+
+	public EstiloMusical stringToEstilo (String string){
+		EstiloMusical estiloAux = new EstiloMusical ();
+		estiloAux = estiloMusicalDAO.buscaPorNome(string);
+		return estiloAux;
+	}
+	
+	public List<EstiloMusical> listStringToListEstilo (List<String> stringsL){
+		List<EstiloMusical> estilosL = new ArrayList<EstiloMusical>();
+		for (int i = 0; i < stringsL.size(); i++) {  
+	        estilosL.add(stringToEstilo(stringsL.get(i)));	  
+	    }  
+		return estilosL;		
+	}	
 
 }

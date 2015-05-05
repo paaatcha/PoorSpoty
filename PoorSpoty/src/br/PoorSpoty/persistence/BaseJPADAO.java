@@ -42,13 +42,4 @@ public abstract class BaseJPADAO<T extends Serializable> implements BaseDAO<T> {
 		getEntityManager().remove(obj);		
 	}
 	
-	@Override
-	public T buscaPorNome (String nome){
-		Query q = getEntityManager().createQuery(
-					"SELECT a FROM " + getDomainClass().getSimpleName() + "a WHERE a.nome = " + nome
-				);
-				
-		return (T) q.getSingleResult();
-	}
-
 }
