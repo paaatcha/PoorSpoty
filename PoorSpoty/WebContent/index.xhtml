@@ -10,17 +10,19 @@
       <ui:define name="title">Bem vindo</ui:define>      
       <ui:define name="login">
       	<h:form class="formLogin">
+      			<p:messages autoUpdate="true" />
       		
       			<p> Nick :</p>
-	      		<p:inputText id="nick" size="30" />
+      			<p:inputText id="usuario" size="30" value="#{auth.nomeUsuario}" />
 	      		
-	      		<p> Senha :</p>    		
-	      		<p:password id="senha_login" size="30" />     		
+	      		
+	      		<p> Senha :</p>
+	      		<p:password id="senha_login" size="30" value="#{auth.senha}" />   			
 	      		
 	      		<br></br>
 	      		<br></br>
 	      		
-	      		<p:commandButton  value="Entrar" class="botao"/>
+	      		<p:commandButton  value="Entrar" class="botao" action="#{auth.login}"/>
 	      	
       	</h:form>      
       </ui:define>
