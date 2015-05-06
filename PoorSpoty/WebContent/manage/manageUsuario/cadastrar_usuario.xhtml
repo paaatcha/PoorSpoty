@@ -36,7 +36,7 @@
 				/>
 				<br></br>
 				<p:message for="nome" />
-            	<h:outputText value="#{manageUsuario.usuario.nome}" /> 							
+            	<!--  <h:outputText value="#{manageUsuario.usuario.nome}" /> --> 							
 				
 				
 				<p> Sobrenome: </p> 
@@ -55,7 +55,7 @@
 				
 				</p:inputText>
 				<p:message for="email" />
-            	<h:outputText value="#{manageUsuario.usuario.email}" />
+            	<!--   <h:outputText value="#{manageUsuario.usuario.email}" /> -->
 				
 				
 				<p> Sexo* : </p>				
@@ -74,7 +74,7 @@
         			<f:convertDateTime pattern="dd/MM/yyyy" />
         		</p:inputMask>
 				<p:message for="dataNasc" />
-            	<h:outputText value="#{manageUsuario.usuario.dataNasc}" />
+            	<!--   <h:outputText value="#{manageUsuario.usuario.dataNasc}" /> -->
 				
 				
 				<p> Nick para login* : </p> 
@@ -87,7 +87,7 @@
 				
 				</p:inputText>
 				<p:message for="nick" />
-            	<h:outputText value="#{manageUsuario.usuario.nick}" />
+            	<!--  <h:outputText value="#{manageUsuario.usuario.nick}" /> -->
             	
             	<p> Senha* :</p>
             	<p:password id="senha1" value="#{manageUsuario.usuario.senha}" feedback="true"
@@ -99,7 +99,7 @@
                     validatorMessage="A senha 1 não é igual a senha 2."
                     />
             	<p:message for="senha1" />
-            	<h:outputText value="#{manageUsuario.usuario.senha}" />
+            	<!--   <h:outputText value="#{manageUsuario.usuario.senha}" /> -->
             	
             	 
         		<p> Repita a senha anterior* :</p>

@@ -53,14 +53,14 @@ public class LoginBean {
 		this.usuario = usuarioDAO.getByNameAndPass(this.nomeUsuario, this.senha);
 		if (this.usuario == null) {
 			FacesMessage mensagem = new FacesMessage(
-					"Usuário/senha inválidos!");
+					"Usuario/senha invalidos!");
 					mensagem.setSeverity(FacesMessage.SEVERITY_ERROR);
 					context.addMessage(null, mensagem);
 			return "failure";
 		} else {
 			this.logado = true;
 			this.deslogado = false;
-			return "/pagina_admin/admin.xhtml?faces-redirect=true";
+			return "/pag_admin/admin.xhtml?faces-redirect=true";
 		}		
 	}
 	
