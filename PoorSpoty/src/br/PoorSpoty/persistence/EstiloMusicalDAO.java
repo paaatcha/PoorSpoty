@@ -1,10 +1,13 @@
 package br.PoorSpoty.persistence;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import br.PoorSpoty.domain.Banda;
 import br.PoorSpoty.domain.EstiloMusical;
 
 @Stateless
@@ -25,10 +28,12 @@ public class EstiloMusicalDAO extends BaseJPADAO<EstiloMusical> {
 
 	public EstiloMusical buscaPorNome (String nome){
 		TypedQuery<EstiloMusical> q = em.createQuery(
-					"SELECT e FROM EstiloMusical AS e WHERE e.nome = '" + nome + "'",
+					"SELECT e FROM EstiloMusical AS e WHERE e.nome = :nome",
 				EstiloMusical.class);
-				
-		return q.getSingleResult();
+		q.setParameter("nome",nome);
+		List<EstiloMusical> results = q.getResultList();
+		
+		return results.get(0);
 	}	
 	
 }

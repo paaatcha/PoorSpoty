@@ -34,7 +34,7 @@ public class Usuario implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date dataNasc;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioBanda")		
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")		
 	private List<Banda> bandas;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")	
@@ -119,7 +119,7 @@ public class Usuario implements Serializable{
 		return bandas;
 	}
 
-	public void setBandas(List<Banda> bandas) {
+	public void setBandas(List<Banda> bandas) {		
 		this.bandas = bandas;
 	}
 
@@ -139,5 +139,26 @@ public class Usuario implements Serializable{
 		this.estilosNao = estilosNao;
 	}	
 	
+	public void printUsuario (){
+		System.out.println("Imprimindo usuaio:");
+		System.out.println(this.nome);
+		
+		System.out.println("Estilos gosta:");
+		for (int i=0; i<this.estilos.size(); i++){
+			this.estilos.get(i).printEstilo();
+		}
+		
+		System.out.println("Estilos Nao gosta:");
+		for (int i=0; i<this.estilosNao.size(); i++){
+			this.estilosNao.get(i).printEstilo();
+		}
+		
+		System.out.println("Bandas:");
+		for (int i=0; i<this.bandas.size(); i++){
+			this.bandas.get(i).printBanda();
+		}		
+		
+		
+	}
 	
 }

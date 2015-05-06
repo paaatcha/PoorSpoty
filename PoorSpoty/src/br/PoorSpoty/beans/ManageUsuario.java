@@ -128,9 +128,11 @@ public class ManageUsuario implements Serializable{
 	
 	public String salvar (){
 		try{
-			this.usuario.setBandas(listStringToListBanda(bandas));			
-			this.usuario.setEstilos(listStringToListEstilo(estilosCurtidos));
-			this.usuario.setEstilosNao(listStringToListEstilo(estilosNaoCurtidos));	
+			this.usuario.setBandas(listStringToListBanda(this.bandas));			
+			this.usuario.setEstilos(listStringToListEstilo(this.estilosCurtidos));
+			this.usuario.setEstilosNao(listStringToListEstilo(this.estilosNaoCurtidos));	
+			
+			//this.usuario.printUsuario();
 			
 			this.usuarioDAO.salvar(usuario);
 		}catch(Exception e){
@@ -223,7 +225,7 @@ public class ManageUsuario implements Serializable{
 	
 	public Banda stringToBanda (String string){
 		Banda bandaAux = new Banda ();
-		bandaAux = bandaDAO.buscaPorNome(string);	
+		bandaAux = bandaDAO.buscaPorNome(string);
 		return bandaAux;
 	}
 	
@@ -231,7 +233,8 @@ public class ManageUsuario implements Serializable{
 		List<Banda> bandasL = new ArrayList<Banda>();
 		for (int i = 0; i < stringsL.size(); i++) {  			
 			bandasL.add(stringToBanda(stringsL.get(i)));	        
-	    } 		
+	    } 
+		
 		return bandasL;		
 	}
 	
