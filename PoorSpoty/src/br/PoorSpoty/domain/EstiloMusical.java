@@ -18,7 +18,6 @@ public class EstiloMusical implements Serializable {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name="estilo")
 	private Usuario usuario;
 	
 	private String nome;
@@ -49,8 +48,7 @@ public class EstiloMusical implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public void printEstilo (){
-		System.out.print("Banda 1:\n");
+	public void printEstilo (){		
 		System.out.print(this.id+" ");
 		System.out.print(this.nome+"\n");
 	}

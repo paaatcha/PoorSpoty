@@ -22,18 +22,17 @@ public class Banda implements Serializable{
 	private String nome;
 	
 	@ManyToOne
-	@JoinColumn(name="bandas")
-	private Usuario usuarioBanda;
+	private Usuario usuario;
 	
 	@OneToOne
 	private EstiloMusical estilo;
 		
-	public Usuario getUsuarioBanda() {
-		return usuarioBanda;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setUsuarioBanda(Usuario usuarioBanda) {
-		this.usuarioBanda = usuarioBanda;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public Long getId() {
@@ -62,7 +61,6 @@ public class Banda implements Serializable{
 	}
 	
 	public void printBanda (){
-		System.out.print("Banda 1:\n");
 		System.out.print(this.id+" ");
 		System.out.print(this.nome+"\n");
 	}
