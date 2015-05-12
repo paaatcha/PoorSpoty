@@ -17,9 +17,6 @@ public class EstiloMusical implements Serializable {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@ManyToOne
-	private Usuario usuario;
-	
 	private String nome;
 	
 	public Long getId() {
@@ -37,15 +34,6 @@ public class EstiloMusical implements Serializable {
 	public void setNome(String nome) {
 		nome = nome.toUpperCase();
 		this.nome = nome;
-	}
-	
-		
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 	public void printEstilo (){		

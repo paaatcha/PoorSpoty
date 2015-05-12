@@ -22,19 +22,8 @@ public class Banda implements Serializable{
 	private String nome;
 	
 	@ManyToOne
-	private Usuario usuario;
-	
-	@OneToOne
 	private EstiloMusical estilo;
 		
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
 	public Long getId() {
 		return id;
 	}
