@@ -1,17 +1,15 @@
 package br.PoorSpoty.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -34,13 +32,15 @@ public class Usuario implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date dataNasc;
 	
-	@OneToMany(cascade = CascadeType.ALL)		
+	@ManyToMany	
 	private List<Banda> bandas;// = new ArrayList<Banda>();
-	
-	@ManyToMany(cascade = CascadeType.ALL)	
+
+	@ManyToMany
+	@JoinTable(name = "usuario_estilomusical_sim")
 	private List<EstiloMusical> estilos;// = new ArrayList<EstiloMusical>();
 	
-	@ManyToMany(cascade = CascadeType.ALL)	
+	@ManyToMany
+	@JoinTable(name = "usuario_estilomusical_nao")
 	private List<EstiloMusical> estilosNao;// = new ArrayList<EstiloMusical>();
 
 	public Long getId() {
