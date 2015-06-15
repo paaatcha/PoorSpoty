@@ -28,6 +28,7 @@ public class Usuario implements Serializable{
 	private char sexo;
 	private String nick;
 	private String descricao;
+	private int tipo; /* 1 : Admin; 0 : Usuário Normal*/
 	
 	@Temporal(TemporalType.DATE)
 	private Date dataNasc;
@@ -139,6 +140,14 @@ public class Usuario implements Serializable{
 		this.estilosNao = estilosNao;
 	}	
 	
+	public int getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}
+
 	public void printUsuario (){
 		System.out.println("Imprimindo usuaio:");
 		System.out.println(this.nome);

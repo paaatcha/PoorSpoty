@@ -14,24 +14,36 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.PoorSpoty.beans.LoginBean;
 
-@WebFilter("/pag_usuario/*")
-public class AutorizacaoFilter implements Filter {
+/**
+ * Servlet Filter implementation class AdminFilter
+ */
+@WebFilter("/pag_admin/*")
+public class AdminFilter implements Filter {
 
-	@Override
+    /**
+     * Default constructor. 
+     */
+    public AdminFilter() {
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see Filter#destroy()
+	 */
 	public void destroy() {
 		// TODO Auto-generated method stub
-
 	}
 
-	@Override
+	/**
+	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
+	 */
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-		/*-----------------------------------------------------------*/
 		HttpServletResponse response = (HttpServletResponse) res;
 		HttpServletRequest request = (HttpServletRequest) req;
 		
 		LoginBean auth = (LoginBean) request.getSession().getAttribute("auth");
 		
-		if(auth != null && auth.isLogado() && !request.getRequestURI().endsWith("/login.xhtml")){
+		if(auth != null && auth.isLogado() && auth.isAdmin() && !request.getRequestURI().endsWith("/login.xhtml")){
 			 // User is logged in, so just continue request.
             chain.doFilter(request, response);
 		}else{
@@ -39,10 +51,11 @@ public class AutorizacaoFilter implements Filter {
 		}
 	}
 
-	@Override
-	public void init(FilterConfig arg0) throws ServletException {
+	/**
+	 * @see Filter#init(FilterConfig)
+	 */
+	public void init(FilterConfig fConfig) throws ServletException {
 		// TODO Auto-generated method stub
-
 	}
 
 }

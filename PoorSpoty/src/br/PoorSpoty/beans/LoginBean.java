@@ -48,6 +48,19 @@ public class LoginBean {
 		this.deslogado = deslogado;
 	}
 	
+	public boolean isAdmin(){
+		if( this.usuario.getTipo() == 1)
+			return true;
+		else
+			return false;
+	}	
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	public String login(){
 		FacesContext context = FacesContext.getCurrentInstance();
 		this.usuario = usuarioDAO.getByNameAndPass(this.nomeUsuario, this.senha);
@@ -60,7 +73,11 @@ public class LoginBean {
 		} else {
 			this.logado = true;
 			this.deslogado = false;
-			return "/pag_admin/admin.xhtml?faces-redirect=true";
+			if(this.usuario.getTipo() == 0)
+				return "/pag_admin/admin.xhtml?faces-redirect=true";
+			else
+				return "/pag_usuario/inicio.xhtml?faces-redirect=true";
+				
 		}		
 	}
 	

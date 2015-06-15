@@ -26,12 +26,12 @@ public class UsuarioDAO extends BaseJPADAO<Usuario> {
 	
 	public Usuario getByNameAndPass(String login, String senha){
 		Usuario user = new Usuario();
-		Query q = em.createQuery("SELECT u FROM Usuario u WHERE u.nome = :login AND u.senha = :senha");
+		Query q = em.createQuery("SELECT u FROM Usuario u WHERE u.nick = :login AND u.senha = :senha");
 		q.setParameter("login", login);
 		q.setParameter("senha", senha);
 		try {
 			user = (Usuario)q.getSingleResult();
-			if(! login.equalsIgnoreCase(user.getNome()) && senha.equalsIgnoreCase(user.getSenha())){
+			if(! login.equalsIgnoreCase(user.getNick()) && senha.equalsIgnoreCase(user.getSenha())){
 				user = null;
 			}
 		} catch (Exception e) {
