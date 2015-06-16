@@ -73,7 +73,7 @@ public class LoginBean {
 		} else {
 			this.logado = true;
 			this.deslogado = false;
-			if(this.usuario.getTipo() == 0)
+			if(this.usuario.getTipo()==1)
 				return "/pag_admin/admin.xhtml?faces-redirect=true";
 			else
 				return "/pag_usuario/inicio.xhtml?faces-redirect=true";

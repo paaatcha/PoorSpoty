@@ -28,7 +28,7 @@ public class Usuario implements Serializable{
 	private char sexo;
 	private String nick;
 	private String descricao;
-	private int tipo; /* 1 : Admin; 0 : Usuário Normal*/
+	private int tipo; /* 1 : Admin; 0 : Usuario Normal*/
 	
 	@Temporal(TemporalType.DATE)
 	private Date dataNasc;

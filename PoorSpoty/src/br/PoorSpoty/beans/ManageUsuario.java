@@ -141,6 +141,21 @@ public class ManageUsuario implements Serializable{
 		return "/manage/manageUsuario/listar_usuarios";
 	}
 	
+	public String salvar2 (){
+		try{
+			this.usuario.setBandas(listStringToListBanda(this.bandas));			
+			this.usuario.setEstilos(listStringToListEstilo(this.estilosCurtidos));
+			this.usuario.setEstilosNao(listStringToListEstilo(this.estilosNaoCurtidos));	
+			
+			//this.usuario.printUsuario();
+			
+			this.usuarioDAO.salvar(usuario);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "index";
+	}	
+	
 	public void excluir(){
 		Long idUsuario = ((Usuario)this.usuarios.getRowData()).getId();
 		try{
