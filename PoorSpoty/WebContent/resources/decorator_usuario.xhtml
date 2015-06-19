@@ -31,7 +31,7 @@
 							<li>
 								<h:form> 
 									<h:commandLink value="Sair" action="#{auth.logout}" type="submit" /> 
-									</h:form>
+								</h:form>
 							</li>
 								
 						</ul>	
@@ -52,6 +52,7 @@
 		<div class="boxBordaClear">				
 		</div>
 	
+		<!-- 
 		<div id="boxRankings">	
 			<div id="boxRankingBandas">
 				<h2> Top 5 bandas PoorSpoty: </h2>
@@ -76,11 +77,15 @@
 			</div>	
 		
 		 </div>
-		 
+		  -->
 		 <div class="boxBordaClear">				
 		 </div>
 		
 		<div id="boxSugestao">
+			<h:form>
+				<h:commandLink action="/pag_usuario/construcao.faces" value="Minhas Bandas" />
+			</h:form>
+			
 			<h:form>
 				<h:commandLink action="/pag_usuario/construcao.faces" value="Me sugira algo novo" />
 			</h:form>		

@@ -292,8 +292,7 @@ a img{
     margin: 0 auto;         	
 }
 
-#dadosUsuario div{
-	float: left;	
+#dadosUsuario div{		
 	margin-top: 30px;	
     padding-left: 30px;	
 }

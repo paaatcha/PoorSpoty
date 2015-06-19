@@ -3,12 +3,11 @@ package br.PoorSpoty.domain;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Banda implements Serializable{
@@ -21,7 +20,7 @@ public class Banda implements Serializable{
 	
 	private String nome;
 	
-	@ManyToOne
+	@ManyToOne (fetch = FetchType.EAGER)
 	private EstiloMusical estilo;
 		
 	public Long getId() {

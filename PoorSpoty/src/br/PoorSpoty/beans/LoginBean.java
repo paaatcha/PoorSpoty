@@ -1,11 +1,17 @@
 package br.PoorSpoty.beans;
 
+import java.sql.Date;
+import java.util.Calendar;
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import br.PoorSpoty.domain.Banda;
+import br.PoorSpoty.domain.EstiloMusical;
 import br.PoorSpoty.domain.Usuario;
 import br.PoorSpoty.persistence.UsuarioDAO;
 
@@ -85,8 +91,77 @@ public class LoginBean {
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		this.usuario = null;
    	 	this.logado = false;
-   	 	return "index.html";
+   	 	return "../index.xhtml?faces-redirect=true";
 	}
 	
+	public int getIdadeUsuario() {
+		java.util.Date birthDate = new java.util.Date(this.usuario.getDataNasc().getTime());				
+		//if (birthDate == null) return 0;
+		Calendar birth = Calendar.getInstance();
+		birth.setTime(birthDate);
+		Calendar today = Calendar.getInstance();
+		today.setTime(new Date(System.currentTimeMillis()));
+		int age = today.get(Calendar.YEAR) - birth.get(Calendar.YEAR);
+		birth.add(Calendar.YEAR, age);
+		if (birth.after(today)) age--;
+		return age;
+	}
+	
+	public String getBandasUsuario() {
+		List<Banda> bandasUsu = this.usuario.getBandas();
+		String saida = new String();
+		saida = "";
+		
+		for (int i = 0; i < bandasUsu.size(); i++) {  	        
+			String band = new String(); 
+			band = bandasUsu.get(i).getNome().toLowerCase();
+			band = band.substring(0,1).toUpperCase() + band.substring(1);
+			saida = saida + band;
+			if (i < bandasUsu.size()-2){
+				saida = saida + ", ";
+			}else if(i < bandasUsu.size()-1){
+				saida = saida + " e ";
+			}
+		}  		
+		return saida;	
+	}
+	
+	public String getEstilosUsuario() {
+		List<EstiloMusical> estilosUsu = this.usuario.getEstilos();
+		String saida = new String();
+		saida = "";
+		
+		for (int i = 0; i < estilosUsu.size(); i++) {  	        
+			String est = new String(); 
+			est = estilosUsu.get(i).getNome().toLowerCase();
+			est = est.substring(0,1).toUpperCase() + est.substring(1);
+			saida = saida + est;
+			if (i < estilosUsu.size()-2){
+				saida = saida + ", ";
+			}else if(i < estilosUsu.size()-1){
+				saida = saida + " e ";
+			}
+		}  		
+		return saida;	
+	}
+	
+	public String getEstilosNaoUsuario() {
+		List<EstiloMusical> estilosUsu = this.usuario.getEstilosNao();
+		String saida = new String();
+		saida = "";
+		
+		for (int i = 0; i < estilosUsu.size(); i++) {  	        
+			String est = new String(); 
+			est = estilosUsu.get(i).getNome().toLowerCase();
+			est = est.substring(0,1).toUpperCase() + est.substring(1);
+			saida = saida + est;
+			if (i < estilosUsu.size()-2){
+				saida = saida + ", ";
+			}else if(i < estilosUsu.size()-1){
+				saida = saida + " e ";
+			}
+		}  		
+		return saida;	
+	}	
 
 }

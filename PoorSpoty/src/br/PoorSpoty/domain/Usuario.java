@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,14 +34,14 @@ public class Usuario implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date dataNasc;
 	
-	@ManyToMany	
+	@ManyToMany	(fetch = FetchType.EAGER)
 	private List<Banda> bandas;// = new ArrayList<Banda>();
 
-	@ManyToMany
+	@ManyToMany (fetch = FetchType.EAGER)
 	@JoinTable(name = "usuario_estilomusical_sim")
 	private List<EstiloMusical> estilos;// = new ArrayList<EstiloMusical>();
 	
-	@ManyToMany
+	@ManyToMany (fetch = FetchType.EAGER)
 	@JoinTable(name = "usuario_estilomusical_nao")
 	private List<EstiloMusical> estilosNao;// = new ArrayList<EstiloMusical>();
 

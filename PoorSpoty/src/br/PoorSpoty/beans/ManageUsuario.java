@@ -273,4 +273,6 @@ public class ManageUsuario implements Serializable{
 	    }  
 		return estilosL;		
 	}	
+	
+	
 }
