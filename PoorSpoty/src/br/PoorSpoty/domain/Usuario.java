@@ -30,6 +30,7 @@ public class Usuario implements Serializable{
 	private String nick;
 	private String descricao;
 	private int tipo; /* 1 : Admin; 0 : Usuario Normal*/
+	private int avatar;
 	
 	@Temporal(TemporalType.DATE)
 	private Date dataNasc;
@@ -45,6 +46,14 @@ public class Usuario implements Serializable{
 	@JoinTable(name = "usuario_estilomusical_nao")
 	private List<EstiloMusical> estilosNao;// = new ArrayList<EstiloMusical>();
 
+	public int getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(int avatar) {
+		this.avatar = avatar;
+	}
+	
 	public Long getId() {
 		return id;
 	}

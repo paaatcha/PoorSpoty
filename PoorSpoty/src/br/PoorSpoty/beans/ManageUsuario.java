@@ -54,11 +54,27 @@ public class ManageUsuario implements Serializable{
 	private String banda = new String();	
 	private List<String> bandas = new ArrayList<String>();
 	
+	private List<Integer> avatars = new ArrayList<Integer>();	
+	
 	// ###################  INICIO GETTERS E SETTERS ###################
+	
+	public ManageUsuario() {
+		super();
+		for (int i=1; i<21; i++){
+			avatars.add(i);
+		}		
+	}
+	public List<Integer> getAvatars() {
+		return avatars;
+	}
+	public void setAvatars(List<Integer> avatars) {
+		this.avatars = avatars;
+	}	
 	
 	public Usuario getUsuario() {
 		return usuario;
 	}
+
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}

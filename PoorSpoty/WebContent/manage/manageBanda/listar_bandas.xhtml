@@ -20,7 +20,11 @@
 					
 					<div id="menuCabecalhoUsuario">
 						<ul>							
-							<li> <a href="#"> Sair </a> </li>								
+							<li> 
+								<h:form> 
+									<h:commandLink value="Sair" action="#{auth.logout}" type="submit" /> 
+								</h:form>
+							</li>								
 						</ul>	
 					</div>				
 			</div>

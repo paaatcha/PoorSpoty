@@ -213,6 +213,25 @@
 					</p:dataTable>
     			</p:overlayPanel>
 				
+				<br></br><br></br>
+				 
+				 				 
+				<h2> Escolha um avatar: </h2>
+				
+				<p:dataList value="#{manageUsuario.avatars}" var="avatar" type="definition">
+			        <f:facet name="header">
+			            Avatar
+			        </f:facet>
+			        Avatar número #{avatar}
+			        <f:facet name="description">
+            			<img src="#{facesContext.externalContext.requestContextPath}/resources/imagens/avatar/#{avatar}.jpg" height="43" width="48"/> 
+        			</f:facet>			        
+			    </p:dataList>		
+
+				
+			      		
+	      		<p:spinner id="basic" value="#{manageUsuario.usuario.avatar}" min="0" max="20"/>
+	    			 
 				 
 				<br></br><br></br>
 				
