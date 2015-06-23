@@ -1,6 +1,7 @@
 package br.PoorSpoty.beans;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -9,6 +10,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.rdf.model.Literal;
 
 import br.PoorSpoty.domain.Banda;
 import br.PoorSpoty.domain.EstiloMusical;
@@ -29,6 +36,15 @@ public class LoginBean {
 	private boolean logado;
 	private boolean deslogado;
 	
+	private List<Banda> bandasUsu;
+	private List<EstiloMusical> estilosUsu;
+	private List<EstiloMusical> estilosNaoUsu;
+	
+	private List<String> bandasString;
+	private List<String> estilosString;
+	private List<String> estilosNaoString;
+	
+
 	public String getNomeUsuario() {
 		return nomeUsuario;
 	}
@@ -76,13 +92,30 @@ public class LoginBean {
 					mensagem.setSeverity(FacesMessage.SEVERITY_ERROR);
 					context.addMessage(null, mensagem);
 			return "failure";
-		} else {
+		} else {			
 			this.logado = true;
-			this.deslogado = false;
-			if(this.usuario.getTipo()==1)
+			this.deslogado = false;			
+			
+			if(this.usuario.getTipo()==1){
 				return "/pag_admin/admin.xhtml?faces-redirect=true";
-			else
+			} else {
+				
+				// Pegando as listas de bandas e estilos de uma vez pra evitar ficar pegando toda hora
+				// admin não pega pq nao precisa
+				this.bandasUsu = new ArrayList<Banda>();
+				this.estilosUsu = new ArrayList<EstiloMusical>();
+				this.estilosNaoUsu = new ArrayList<EstiloMusical>();
+				
+				this.bandasString = new ArrayList<String>();
+				this.estilosString = new ArrayList<String>();
+				this.estilosNaoString = new ArrayList<String>();
+				
+				this.bandasUsu = this.usuario.getBandas();
+				this.estilosUsu = this.usuario.getEstilos();
+				this.estilosNaoUsu = this.usuario.getEstilosNao();				
+				// fim
 				return "/pag_usuario/inicio.xhtml?faces-redirect=true";
+			}
 				
 		}		
 	}
@@ -108,7 +141,7 @@ public class LoginBean {
 	}
 	
 	public String getBandasUsuario() {
-		List<Banda> bandasUsu = this.usuario.getBandas();
+		//List<Banda> bandasUsu = this.usuario.getBandas();
 		String saida = new String();
 		saida = "";
 		
@@ -116,6 +149,7 @@ public class LoginBean {
 			String band = new String(); 
 			band = bandasUsu.get(i).getNome().toLowerCase();
 			band = band.substring(0,1).toUpperCase() + band.substring(1);
+			bandasString.add(band);
 			saida = saida + band;
 			if (i < bandasUsu.size()-2){
 				saida = saida + ", ";
@@ -127,7 +161,7 @@ public class LoginBean {
 	}
 	
 	public String getEstilosUsuario() {
-		List<EstiloMusical> estilosUsu = this.usuario.getEstilos();
+		//List<EstiloMusical> estilosUsu = this.usuario.getEstilos();
 		String saida = new String();
 		saida = "";
 		
@@ -135,6 +169,7 @@ public class LoginBean {
 			String est = new String(); 
 			est = estilosUsu.get(i).getNome().toLowerCase();
 			est = est.substring(0,1).toUpperCase() + est.substring(1);
+			estilosString.add(est);
 			saida = saida + est;
 			if (i < estilosUsu.size()-2){
 				saida = saida + ", ";
@@ -146,24 +181,51 @@ public class LoginBean {
 	}
 	
 	public String getEstilosNaoUsuario() {
-		List<EstiloMusical> estilosUsu = this.usuario.getEstilosNao();
+		//List<EstiloMusical> estilosUsu = this.usuario.getEstilosNao();
 		String saida = new String();
 		saida = "";
 		
-		for (int i = 0; i < estilosUsu.size(); i++) {  	        
+		for (int i = 0; i < estilosNaoUsu.size(); i++) {  	        
 			String est = new String(); 
-			est = estilosUsu.get(i).getNome().toLowerCase();
+			est = estilosNaoUsu.get(i).getNome().toLowerCase();
 			est = est.substring(0,1).toUpperCase() + est.substring(1);
 			saida = saida + est;
-			if (i < estilosUsu.size()-2){
+			estilosNaoString.add(est);
+			if (i < estilosNaoUsu.size()-2){
 				saida = saida + ", ";
-			}else if(i < estilosUsu.size()-1){
+			}else if(i < estilosNaoUsu.size()-1){
 				saida = saida + " e ";
 			}
 		}  		
 		return saida;	
 	}	
 	
+	public String getMembrosBanda(){
+		
+		String band = "Iron Maiden";
+		String query = "PREFIX mo: <http://purl.org/ontology/mo/> PREFIX foaf: <http://xmlns.com/foaf/0.1/> SELECT ?name WHERE { ?member foaf:name ?name ; mo:member_of ?band . ?band foaf:name \"" + band + "\"}";
+		
+		
+		QueryExecution queryExecution = 
+				QueryExecutionFactory.sparqlService(
+						"http://linkedbrainz.org/sparql", 
+						query);
+		ResultSet results = queryExecution.execSelect();
+		
+		String membros = new String ();
+		membros = "";
+		
+
+		for (; results.hasNext() ; ) {
+			QuerySolution solution = results.next();
+			Literal literal = solution.getLiteral("name");
+			membros = (membros + literal.getValue() + "\r\n");
+		}
+					
+		return membros;	
+		
+			
+	}
 	
 
 }
