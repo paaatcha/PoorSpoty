@@ -363,10 +363,8 @@ public class LoginBean {
 		queryExecution.close();			
 	}
 	
-	public String getSugestao (){
-				
-		String estilo = "heavy metal";
-		
+	public int getSugestao (String estilo){
+						
 		String prefixos = "PREFIX foaf: <http://xmlns.com/foaf/0.1/> "+
 				"PREFIX dbpedia-owl: <http://dbpedia.org/ontology/> "+
 					"PREFIX dbpprop: <http://dbpedia.org/property/> ";
@@ -395,7 +393,7 @@ public class LoginBean {
 			  "FILTER (langMatches(lang(?desc), \"PT\")) " +
 			  "} " +
 			"} ORDER BY ?dur " + 
-			"LIMIT 100 ";
+			"LIMIT 50 ";
 		
 				
 		QueryExecution queryExecution = 
@@ -409,6 +407,7 @@ public class LoginBean {
 		String nome = "";
 		String site = "";
 		String descricao = "";		
+		int flag = 0;
 		
 		while (results.hasNext()){
 			QuerySolution linha = (QuerySolution) results.nextSolution();
@@ -417,6 +416,7 @@ public class LoginBean {
 			Resource siteRes = linha.getResource("website");
 			site = siteRes.getURI();
 			
+						
 			Literal nomeLiteral = linha.getLiteral("nomeBanda");
 			nome = ("" + nomeLiteral.getValue());
 							
@@ -424,42 +424,50 @@ public class LoginBean {
 			Literal descLiteral = linha.getLiteral("desc");
 			descricao = ("" + descLiteral.getValue());		
 			
-			//System.out.println(site + nome + descricao);
+			System.out.println(nome);
 			
 			Banda band = new Banda ();			
 			band.setNome(nome);
 			band.setDescricao(descricao);
 			band.setSite(site);
 			
-			this.bandasSugestao.add(band);			
-		}		
+			this.bandasSugestao.add(band);	
+			flag = 1;
+		}	
 		
-		return "/pag_usuario/sugestao.faces";
-		
+		return flag;
+			
 	}
 	
 	
 	public String goSugestao (){
 		
-		//int numEstilos = this.estilosString.size();				
-		//Random gerador = new Random();  
+		int numEstilos = this.estilosString.size();				
+		Random gerador = new Random();  
 		
 		// Escolhendo um estilo ao acaso
-		//int numRand = gerador.nextInt(numEstilos);
-		//String estiloAlvo = estilosString.get(numRand);
+		int numRand = gerador.nextInt(numEstilos);
+		String estiloAlvo = estilosString.get(numRand);
 		
-		//getSugestao();
-		/*
-		int tamSug = this.bandasSugestao.size();
-		int numRand = gerador.nextInt(tamSug);
-						
-		while (tamSug > 5){
-			this.bandasSugestao.remove(numRand);			
-			tamSug = this.bandasSugestao.size();
-			numRand = gerador.nextInt(tamSug);
-		}	*/	
+		int flag = getSugestao("heavy metal");
 		
-		return "/pag_usuario/sugestao.faces";
+		if (flag==0){
+			return "/pag_usuario/semSugestao.faces";			
+		} else {
+		
+			int tamSug = this.bandasSugestao.size();		
+							
+			while (tamSug > 5){
+				this.bandasSugestao.remove(numRand);			
+				tamSug = this.bandasSugestao.size();
+				numRand = gerador.nextInt(tamSug);
+			}
+			
+			return "/pag_usuario/sugestao.faces";
+			
+		}
+		
+		
 	}
 		
 	public String getMinhasBandas(){
