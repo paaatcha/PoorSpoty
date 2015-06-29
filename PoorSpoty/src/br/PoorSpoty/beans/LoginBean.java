@@ -20,6 +20,7 @@ import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
@@ -238,62 +239,109 @@ public class LoginBean {
 		return membrosFinal;
 	}
 	
-	public String getMinhasBandas(){
+	public String getInfoBandas (String banda){
 		String prefixos = "PREFIX foaf: <http://xmlns.com/foaf/0.1/> "+
-							"PREFIX dbpedia-owl: <http://dbpedia.org/ontology/> "+
-								"PREFIX dbpprop: <http://dbpedia.org/property/> ";
-		
-		// Só para testes
-		String banda = "metallica";		
-		  
-		
+				"PREFIX dbpedia-owl: <http://dbpedia.org/ontology/> "+
+					"PREFIX dbpprop: <http://dbpedia.org/property/> ";
+
 		String queryBanda = prefixos +
-			"SELECT ?desc ?membersLink ?website " +
-			"WHERE { " +
-			 "?x a dbpedia-owl:Band . " +
-			 "?x dbpprop:name ?name . " +			 
-			 "?x dbpedia-owl:abstract ?desc . " +
-			 "?x foaf:homepage ?website . " +
-			 "?x dbpprop:currentMembers ?membersLink . " +
+		"SELECT ?desc ?membersLink ?website " +
+		"WHERE { " +
+		 "?x a dbpedia-owl:Band . " +
+		 "?x dbpprop:name ?name . " +			 
+		 "?x dbpedia-owl:abstract ?desc . " +
+		 "?x foaf:homepage ?website . " +
+		 "?x dbpprop:currentMembers ?membersLink . " +
+		 
+		 "FILTER (lcase(str(?name)) = \"" + banda.toLowerCase() + "\") " +
+		 "FILTER (langMatches(lang(?desc), \"PT\")) " + 
+		"}";
+			
+		QueryExecution queryExecution = 
+				QueryExecutionFactory.sparqlService(
+						"http://dbpedia.org/sparql", 
+						queryBanda);
+		ResultSet results = queryExecution.execSelect();
+		
+		String descricao = "";
+		String site = "";
+		String membros = "";
+		String saida = "";		
+		
+		while (results.hasNext()){
+			QuerySolution linha = (QuerySolution) results.nextSolution();
+			
+			// Pegando o site da banda				
+			Resource siteRes = linha.getResource("website");
+			site = siteRes.getURI();
+							
+			// Pegando a descrição da banda
+			Literal descLiteral = linha.getLiteral("desc");
+			descricao = ("" + descLiteral.getValue());
+			
+			// Pegando os membros da banda
+			RDFNode membersNode = linha.get("membersLink");				
+			membros = (membros + ";"  + membersNode.toString());
+			
+		}		
+		saida = descricao + "<br /> " + formatMembros(membros) + "<br />" + site;					
+		queryExecution.close();
+				
+		return saida;				
+	}
+	
+	public String getInfoArtistas (String artista){
+		String prefixos = "PREFIX foaf: <http://xmlns.com/foaf/0.1/> "+
+				"PREFIX dbpedia-owl: <http://dbpedia.org/ontology/> "+
+					"PREFIX dbpprop: <http://dbpedia.org/property/> ";
+
+		String queryBanda = prefixos +
+		"SELECT ?desc ?website " +
+		"WHERE { " +
+		 "?x a dbpedia-owl:MusicalArtist . " +
+		 "?x dbpprop:name ?name . " +			 
+		 "?x dbpedia-owl:abstract ?desc . " +
+		 "?x foaf:homepage ?website . " +
 			 
-			 "FILTER (lcase(str(?name)) = \"" + banda.toLowerCase() + "\") " +
-			 "FILTER (langMatches(lang(?desc), \"PT\")) " + 
-			"}";
-				
-			QueryExecution queryExecution = 
-					QueryExecutionFactory.sparqlService(
-							"http://dbpedia.org/sparql", 
-							queryBanda);
-			ResultSet results = queryExecution.execSelect();
+		 "FILTER (lcase(str(?name)) = \"" + artista.toLowerCase() + "\") " +
+		 "FILTER (langMatches(lang(?desc), \"PT\")) " + 
+		"}";
 			
-			String descricao = "";
-			String site = "";
-			String membros = "";
-			String saida = "";
+		QueryExecution queryExecution = 
+				QueryExecutionFactory.sparqlService(
+						"http://dbpedia.org/sparql", 
+						queryBanda);
+		ResultSet results = queryExecution.execSelect();
+		
+		//ResultSetFormatter.out(System.out, results);
+		
+		String descricao = "";
+		String site = "";		
+		String saida = "";		
+		
+		if (results.hasNext()){
+			QuerySolution linha = (QuerySolution) results.nextSolution();
 			
-			
-			while (results.hasNext()){
-				QuerySolution linha = (QuerySolution) results.nextSolution();
+			// Pegando o site do artista			
+			Resource siteRes = linha.getResource("website");
+			site = siteRes.getURI();
+							
+			// Pegando a descrição do artista
+			Literal descLiteral = linha.getLiteral("desc");
+			descricao = ("" + descLiteral.getValue());			
+		}		
+		saida = descricao + "<br /> " + "<br />" + site;					
+		queryExecution.close();
 				
-				// Pegando o site da banda				
-				Resource siteRes = linha.getResource("website");
-				site = siteRes.getURI();
-								
-				// Pegando a descrição da banda
-				Literal descLiteral = linha.getLiteral("desc");
-				descricao = ("" + descLiteral.getValue());
-				
-				// Pegando os membros da banda
-				RDFNode membersNode = linha.get("membersLink");				
-				membros = (membros + ";"  + membersNode.toString());
-				
-			}
-			
-			saida = descricao + "<br /> " + formatMembros(membros) + "<br />" + site;
-						
-			queryExecution.close();
-					
-		return saida;
+		return saida;				
+	}
+	
+	
+	public String getMinhasBandas(){
+		
+		String banda = "ivete sangalo";		
+		  
+		return getInfoArtistas(banda);
 		
 			
 	}
