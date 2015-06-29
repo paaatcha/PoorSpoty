@@ -175,9 +175,10 @@ public class Usuario implements Serializable{
 		System.out.println("Bandas:");
 		for (int i=0; i<this.bandas.size(); i++){
 			this.bandas.get(i).printBanda();
-		}		
-		
+		}			
 		
 	}
+	
+	
 	
 }

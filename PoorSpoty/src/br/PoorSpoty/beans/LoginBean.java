@@ -48,6 +48,14 @@ public class LoginBean {
 	private List<String> estilosNaoString;
 	
 
+	
+	
+	public List<Banda> getBandasUsu() {
+		return bandasUsu;
+	}
+	public void setBandasUsu(List<Banda> bandasUsu) {
+		this.bandasUsu = bandasUsu;
+	}
 	public String getNomeUsuario() {
 		return nomeUsuario;
 	}
@@ -226,11 +234,19 @@ public class LoginBean {
 		for (int i = 0; i < nMembros; i++){
 			if (vecMembros[i].startsWith(padrao)){
 				preMembros[i] = vecMembros[i].substring(tamPadrao, vecMembros[i].length()).replace("_", " ");
-				membrosFinal = membrosFinal + "<br />" + preMembros[i];
+				if (i>=1){
+					membrosFinal = membrosFinal + " - " + preMembros[i];
+				} else {
+					membrosFinal = membrosFinal + preMembros[i];
+				}
 				//System.out.println (preMembros[i]);
 			} else {
 				preMembros[i] = vecMembros[i].substring(0,vecMembros[i].length()-3);
-				membrosFinal = membrosFinal + "<br />" + preMembros[i];
+				if (i>=1){
+					membrosFinal = membrosFinal + " - " + preMembros[i];
+				} else {
+					membrosFinal = membrosFinal + preMembros[i];
+				}
 				//System.out.println (preMembros[i]);
 			}			
 					
@@ -239,7 +255,7 @@ public class LoginBean {
 		return membrosFinal;
 	}
 	
-	public String getInfoBandas (String banda){
+	public void getInfoBandas (String banda, int indice){
 		String prefixos = "PREFIX foaf: <http://xmlns.com/foaf/0.1/> "+
 				"PREFIX dbpedia-owl: <http://dbpedia.org/ontology/> "+
 					"PREFIX dbpprop: <http://dbpedia.org/property/> ";
@@ -265,8 +281,7 @@ public class LoginBean {
 		
 		String descricao = "";
 		String site = "";
-		String membros = "";
-		String saida = "";		
+		String membros = "";		
 		
 		while (results.hasNext()){
 			QuerySolution linha = (QuerySolution) results.nextSolution();
@@ -284,13 +299,16 @@ public class LoginBean {
 			membros = (membros + ";"  + membersNode.toString());
 			
 		}		
-		saida = descricao + "<br /> " + formatMembros(membros) + "<br />" + site;					
-		queryExecution.close();
-				
-		return saida;				
+		
+		this.bandasUsu.get(indice).setDescricao(descricao);
+		this.bandasUsu.get(indice).setSite (site);
+		this.bandasUsu.get(indice).setMembros(formatMembros(membros));	
+						
+		queryExecution.close();				
+					
 	}
 	
-	public String getInfoArtistas (String artista){
+	public void getInfoArtistas (String artista, int indice){
 		String prefixos = "PREFIX foaf: <http://xmlns.com/foaf/0.1/> "+
 				"PREFIX dbpedia-owl: <http://dbpedia.org/ontology/> "+
 					"PREFIX dbpprop: <http://dbpedia.org/property/> ";
@@ -317,7 +335,6 @@ public class LoginBean {
 		
 		String descricao = "";
 		String site = "";		
-		String saida = "";		
 		
 		if (results.hasNext()){
 			QuerySolution linha = (QuerySolution) results.nextSolution();
@@ -330,21 +347,36 @@ public class LoginBean {
 			Literal descLiteral = linha.getLiteral("desc");
 			descricao = ("" + descLiteral.getValue());			
 		}		
-		saida = descricao + "<br /> " + "<br />" + site;					
-		queryExecution.close();
-				
-		return saida;				
+		
+		this.bandasUsu.get(indice).setDescricao(descricao);
+		this.bandasUsu.get(indice).setSite (site);				 
+		this.bandasUsu.get(indice).setMembros(" - ");	
+						
+		queryExecution.close();			
 	}
 	
 	
 	public String getMinhasBandas(){
+						
+		for (int i = 0; i < bandasUsu.size(); i++){
 		
-		String banda = "ivete sangalo";		
-		  
-		return getInfoArtistas(banda);
+			// se não for carregado a informação, carrega. Caso contrario, pula fora
+			if (bandasUsu.get(i).getLoad() == 0){
+				
+				if (bandasUsu.get(i).getTipo() == 1){
+					getInfoBandas(bandasUsu.get(i).getNome(), i);
+				} else{
+					getInfoArtistas(bandasUsu.get(i).getNome(), i);
+				}
+				
+				bandasUsu.get(i).setLoad(1);
+			}	
+		}
 		
-			
+		return "/pag_usuario/minhasBandas.faces";			
 	}
+	
+	
 	
 
 }

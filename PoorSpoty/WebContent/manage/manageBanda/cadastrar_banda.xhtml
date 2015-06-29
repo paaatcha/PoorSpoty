@@ -42,7 +42,13 @@
 				  required="true"
 				  requiredMessage="Escolha um estilo">
 					<f:selectItems value="#{manageBanda.estilos}" />
-				</p:selectOneMenu>			
+				</p:selectOneMenu>	
+				
+				<p> Tipo : </p>				
+				<p:selectOneRadio id="sexo" value="#{manageBanda.banda.tipo}">
+      				<f:selectItem itemLabel="Banda" itemValue="1"/>
+      				<f:selectItem itemLabel="Músico/Artista" itemValue="0"/>	      		
+      			</p:selectOneRadio>		
 				
 				<br></br><br></br>
 				<p:commandButton class="botao" action="#{manageBanda.salvar}" value="salvar" icon="ui-icon-check"/>				
