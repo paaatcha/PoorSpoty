@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -40,6 +41,7 @@ public class LoginBean {
 	private boolean deslogado;
 	
 	private List<Banda> bandasUsu;
+	private List<Banda> bandasSugestao = new ArrayList<Banda>();
 	private List<EstiloMusical> estilosUsu;
 	private List<EstiloMusical> estilosNaoUsu;
 	
@@ -50,6 +52,12 @@ public class LoginBean {
 
 	
 	
+	public List<Banda> getBandasSugestao() {
+		return bandasSugestao;
+	}
+	public void setBandasSugestao(List<Banda> bandasSugestao) {
+		this.bandasSugestao = bandasSugestao;
+	}
 	public List<Banda> getBandasUsu() {
 		return bandasUsu;
 	}
@@ -355,7 +363,105 @@ public class LoginBean {
 		queryExecution.close();			
 	}
 	
+	public String getSugestao (){
+				
+		String estilo = "heavy metal";
+		
+		String prefixos = "PREFIX foaf: <http://xmlns.com/foaf/0.1/> "+
+				"PREFIX dbpedia-owl: <http://dbpedia.org/ontology/> "+
+					"PREFIX dbpprop: <http://dbpedia.org/property/> ";
+		
+		String query = prefixos + "SELECT ?nomeBanda ?website ?desc "+
+				"WHERE { " +
+			  "{ "+ 
+			  "?x a dbpedia-owl:Band . " +
+			  "?x dbpprop:genre ?name . " +
+			  "?x dbpprop:name ?nomeBanda . " +
+			  "?x dbpedia-owl:activeYearsStartYear ?dur . " +
+			  "?x dbpedia-owl:abstract ?desc . " + 
+			  "?x foaf:homepage ?website . " + 
+			  "FILTER regex(?name,\""+ estilo + "\",\"i\") "+
+			  "FILTER (langMatches(lang(?desc), \"PT\")) " +
+			  "} " +
+			"UNION " +
+			  "{ " +
+			  "?x a dbpedia-owl:MusicArtist . " +
+			  "?x dbpprop:genre ?name . " +
+			  "?x dbpprop:name ?nomeBanda . " +
+			  "?x dbpedia-owl:activeYearsStartYear ?dur . " +
+			  "?x dbpedia-owl:abstract ?desc . " + 
+			  "?x foaf:homepage ?website . " + 
+			  "FILTER regex(?name,\""+ estilo + "\",\"i\") " +
+			  "FILTER (langMatches(lang(?desc), \"PT\")) " +
+			  "} " +
+			"} ORDER BY ?dur " + 
+			"LIMIT 100 ";
+		
+				
+		QueryExecution queryExecution = 
+				QueryExecutionFactory.sparqlService(
+						"http://dbpedia.org/sparql", 
+						query);
+		ResultSet results = queryExecution.execSelect();
+		//ResultSetFormatter.out(System.out, results);
+			
+				
+		String nome = "";
+		String site = "";
+		String descricao = "";		
+		
+		while (results.hasNext()){
+			QuerySolution linha = (QuerySolution) results.nextSolution();
+			
+			// Pegando o site do artista			
+			Resource siteRes = linha.getResource("website");
+			site = siteRes.getURI();
+			
+			Literal nomeLiteral = linha.getLiteral("nomeBanda");
+			nome = ("" + nomeLiteral.getValue());
+							
+			// Pegando a descrição do artista
+			Literal descLiteral = linha.getLiteral("desc");
+			descricao = ("" + descLiteral.getValue());		
+			
+			//System.out.println(site + nome + descricao);
+			
+			Banda band = new Banda ();			
+			band.setNome(nome);
+			band.setDescricao(descricao);
+			band.setSite(site);
+			
+			this.bandasSugestao.add(band);			
+		}		
+		
+		return "/pag_usuario/sugestao.faces";
+		
+	}
 	
+	
+	public String goSugestao (){
+		
+		//int numEstilos = this.estilosString.size();				
+		//Random gerador = new Random();  
+		
+		// Escolhendo um estilo ao acaso
+		//int numRand = gerador.nextInt(numEstilos);
+		//String estiloAlvo = estilosString.get(numRand);
+		
+		//getSugestao();
+		/*
+		int tamSug = this.bandasSugestao.size();
+		int numRand = gerador.nextInt(tamSug);
+						
+		while (tamSug > 5){
+			this.bandasSugestao.remove(numRand);			
+			tamSug = this.bandasSugestao.size();
+			numRand = gerador.nextInt(tamSug);
+		}	*/	
+		
+		return "/pag_usuario/sugestao.faces";
+	}
+		
 	public String getMinhasBandas(){
 						
 		for (int i = 0; i < bandasUsu.size(); i++){

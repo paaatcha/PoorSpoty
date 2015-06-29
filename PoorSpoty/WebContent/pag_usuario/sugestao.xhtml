@@ -10,23 +10,20 @@
       <ui:define name="title">Ajuda</ui:define>      
       <ui:define name="principalUsuario">
       	<div class="textoUsuario">
-	      	<h1> Minhas bandas prediletas </h1>
+	      	<h1> Sugestões de bandas </h1>
 						
 	      	
 	      	<br></br><br></br>
 	      	
 	      	<h:form>	      		
-	    		<p:accordionPanel value="#{auth.bandasUsu}" var="banda">
+	    		<p:accordionPanel value="#{auth.bandasSugestao}" var="banda">
 	        		
 	        		<p:tab title="#{banda.nome}">
 	            		<h:panelGrid columns="2" cellpadding="5">
 	                	               
 		                	<h:outputText value="Descrição:" style="font-weight: bold" />
 		                	<h:outputText value="#{banda.descricao}" />
-		                		                	
-		                	<h:outputText value="Membros:" style="font-weight: bold" />
-		                	<h:outputText value="#{banda.membros}" />
-		                	
+		                		                			                	
 		                	<h:outputText value="Site:" style="font-weight: bold" />		                	
 		                	<a href="#{banda.site}" target="blank"> #{banda.site} </a>
 		                	
