@@ -11,16 +11,18 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import br.PoorSpoty.domain.Banda;
+import br.PoorSpoty.domain.EstiloMusical;
+import br.PoorSpoty.domain.Usuario;
+import br.PoorSpoty.persistence.UsuarioDAO;
+
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Literal;
-
-import br.PoorSpoty.domain.Banda;
-import br.PoorSpoty.domain.EstiloMusical;
-import br.PoorSpoty.domain.Usuario;
-import br.PoorSpoty.persistence.UsuarioDAO;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.Resource;
 
 @ManagedBean(name="auth")
 @SessionScoped
@@ -200,32 +202,103 @@ public class LoginBean {
 		return saida;	
 	}	
 	
-	public String getMembrosBanda(){
+	public String formatMembros (String membros){
+		// retirando o primeiro ;
+		int tam = membros.length();
+		membros = membros.substring(1,tam);
+		//System.out.println (membros);
+			
+		// Quebrando a string em todos os membros
+		String vecMembros[] = membros.split(";");
+		int nMembros = vecMembros.length;
+			
+		// Padrão da do caminho de inicio
+		String padrao = "http://dbpedia.org/resource/";
+		int tamPadrao = padrao.length();
 		
-		String band = "Iron Maiden";
-		String query = "PREFIX mo: <http://purl.org/ontology/mo/> PREFIX foaf: <http://xmlns.com/foaf/0.1/> SELECT ?name WHERE { ?member foaf:name ?name ; mo:member_of ?band . ?band foaf:name \"" + band + "\"}";
+		// Novo vetor de string com membros pré-tratados
+		String preMembros[] = new String[tamPadrao];
 		
+		// String final resultante
+		String membrosFinal = "";
 		
-		QueryExecution queryExecution = 
-				QueryExecutionFactory.sparqlService(
-						"http://linkedbrainz.org/sparql", 
-						query);
-		ResultSet results = queryExecution.execSelect();
-		
-		String membros = new String ();
-		membros = "";
-		
-
-		for (; results.hasNext() ; ) {
-			QuerySolution solution = results.next();
-			Literal literal = solution.getLiteral("name");
-			membros = (membros + literal.getValue() + "\r\n");
-		}
+		for (int i = 0; i < nMembros; i++){
+			if (vecMembros[i].startsWith(padrao)){
+				preMembros[i] = vecMembros[i].substring(tamPadrao, vecMembros[i].length()).replace("_", " ");
+				membrosFinal = membrosFinal + "<br />" + preMembros[i];
+				//System.out.println (preMembros[i]);
+			} else {
+				preMembros[i] = vecMembros[i].substring(0,vecMembros[i].length()-3);
+				membrosFinal = membrosFinal + "<br />" + preMembros[i];
+				//System.out.println (preMembros[i]);
+			}			
 					
-		return membros;	
+		}
+		
+		return membrosFinal;
+	}
+	
+	public String getMinhasBandas(){
+		String prefixos = "PREFIX foaf: <http://xmlns.com/foaf/0.1/> "+
+							"PREFIX dbpedia-owl: <http://dbpedia.org/ontology/> "+
+								"PREFIX dbpprop: <http://dbpedia.org/property/> ";
+		
+		// Só para testes
+		String banda = "metallica";		
+		  
+		
+		String queryBanda = prefixos +
+			"SELECT ?desc ?membersLink ?website " +
+			"WHERE { " +
+			 "?x a dbpedia-owl:Band . " +
+			 "?x dbpprop:name ?name . " +			 
+			 "?x dbpedia-owl:abstract ?desc . " +
+			 "?x foaf:homepage ?website . " +
+			 "?x dbpprop:currentMembers ?membersLink . " +
+			 
+			 "FILTER (lcase(str(?name)) = \"" + banda.toLowerCase() + "\") " +
+			 "FILTER (langMatches(lang(?desc), \"PT\")) " + 
+			"}";
+				
+			QueryExecution queryExecution = 
+					QueryExecutionFactory.sparqlService(
+							"http://dbpedia.org/sparql", 
+							queryBanda);
+			ResultSet results = queryExecution.execSelect();
+			
+			String descricao = "";
+			String site = "";
+			String membros = "";
+			String saida = "";
+			
+			
+			while (results.hasNext()){
+				QuerySolution linha = (QuerySolution) results.nextSolution();
+				
+				// Pegando o site da banda				
+				Resource siteRes = linha.getResource("website");
+				site = siteRes.getURI();
+								
+				// Pegando a descrição da banda
+				Literal descLiteral = linha.getLiteral("desc");
+				descricao = ("" + descLiteral.getValue());
+				
+				// Pegando os membros da banda
+				RDFNode membersNode = linha.get("membersLink");				
+				membros = (membros + ";"  + membersNode.toString());
+				
+			}
+			
+			saida = descricao + "<br /> " + formatMembros(membros) + "<br />" + site;
+						
+			queryExecution.close();
+					
+		return saida;
 		
 			
 	}
 	
 
 }
+
+	
