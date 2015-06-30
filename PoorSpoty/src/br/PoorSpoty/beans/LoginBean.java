@@ -393,7 +393,7 @@ public class LoginBean {
 			  "FILTER (langMatches(lang(?desc), \"PT\")) " +
 			  "} " +
 			"} ORDER BY ?dur " + 
-			"LIMIT 50 ";
+			"LIMIT 100 ";
 		
 				
 		QueryExecution queryExecution = 
@@ -411,28 +411,29 @@ public class LoginBean {
 		
 		while (results.hasNext()){
 			QuerySolution linha = (QuerySolution) results.nextSolution();
-			
-			// Pegando o site do artista			
-			Resource siteRes = linha.getResource("website");
-			site = siteRes.getURI();
-			
 						
-			Literal nomeLiteral = linha.getLiteral("nomeBanda");
-			nome = ("" + nomeLiteral.getValue());
-							
-			// Pegando a descrição do artista
-			Literal descLiteral = linha.getLiteral("desc");
-			descricao = ("" + descLiteral.getValue());		
-			
-			System.out.println(nome);
-			
-			Banda band = new Banda ();			
-			band.setNome(nome);
-			band.setDescricao(descricao);
-			band.setSite(site);
-			
-			this.bandasSugestao.add(band);	
-			flag = 1;
+			if (linha.get("nomeBanda").isLiteral()) {				
+				// Pegando o site do artista			
+				Resource siteRes = linha.getResource("website");
+				site = siteRes.getURI();
+											
+				Literal nomeLiteral = linha.getLiteral("nomeBanda");
+				nome = ("" + nomeLiteral.getValue());				
+								
+				// Pegando a descrição do artista
+				Literal descLiteral = linha.getLiteral("desc");
+				descricao = ("" + descLiteral.getValue());		
+				
+				//System.out.println(nome);
+				
+				Banda band = new Banda ();			
+				band.setNome(nome);
+				band.setDescricao(descricao);
+				band.setSite(site);
+				
+				this.bandasSugestao.add(band);	
+				flag = 1;
+			}
 		}	
 		
 		return flag;
@@ -449,7 +450,7 @@ public class LoginBean {
 		int numRand = gerador.nextInt(numEstilos);
 		String estiloAlvo = estilosString.get(numRand);
 		
-		int flag = getSugestao("heavy metal");
+		int flag = getSugestao(estiloAlvo);
 		
 		if (flag==0){
 			return "/pag_usuario/semSugestao.faces";			
