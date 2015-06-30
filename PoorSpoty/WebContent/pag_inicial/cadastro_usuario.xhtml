@@ -22,7 +22,7 @@
 				/>
 				<br></br>
 				<p:message for="nome" />
-            	<h:outputText value="#{manageUsuario.usuario.nome}" /> 							
+            	<!--  <h:outputText value="#{manageUsuario.usuario.nome}" /> --> 							
 				
 				
 				<p> Sobrenome: </p> 
@@ -41,7 +41,7 @@
 				
 				</p:inputText>
 				<p:message for="email" />
-            	<h:outputText value="#{manageUsuario.usuario.email}" />
+            	<!--   <h:outputText value="#{manageUsuario.usuario.email}" /> -->
 				
 				
 				<p> Sexo* : </p>				
@@ -60,7 +60,7 @@
         			<f:convertDateTime pattern="dd/MM/yyyy" />
         		</p:inputMask>
 				<p:message for="dataNasc" />
-            	<h:outputText value="#{manageUsuario.usuario.dataNasc}" />
+            	<!--   <h:outputText value="#{manageUsuario.usuario.dataNasc}" /> -->
 				
 				
 				<p> Nick para login* : </p> 
@@ -73,7 +73,7 @@
 				
 				</p:inputText>
 				<p:message for="nick" />
-            	<h:outputText value="#{manageUsuario.usuario.nick}" />
+            	<!--  <h:outputText value="#{manageUsuario.usuario.nick}" /> -->
             	
             	<p> Senha* :</p>
             	<p:password id="senha1" value="#{manageUsuario.usuario.senha}" feedback="true"
@@ -85,7 +85,7 @@
                     validatorMessage="A senha 1 não é igual a senha 2."
                     />
             	<p:message for="senha1" />
-            	<h:outputText value="#{manageUsuario.usuario.senha}" />
+            	<!--   <h:outputText value="#{manageUsuario.usuario.senha}" /> -->
             	
             	 
         		<p> Repita a senha anterior* :</p>
@@ -97,7 +97,9 @@
 				
 				<p> Faça uma breve descrição para seu perfil:  </p>        		
       			<p:inputTextarea value="#{manageUsuario.usuario.descricao}" styleClass="boxDecricao"/>				
-				<br></br><br></br>
+				<br></br><br></br>  
+				
+				 
 				
 				<h2> Preferências musicais: </h2>
 				<p:growl id="msgs" showDetail="true" />				
@@ -105,14 +107,12 @@
 				
 				<p> Estilos musicais que você curte*: </p>
 				 <p:autoComplete id="estiloCurti" value="#{manageUsuario.estiloCurtido}" 
-				 completeMethod="#{manageUsuario.completaNome}" 
-				 required="true"
-				 requiredMessage="Você deve escolher pelo menos 1 estilo que curte"
+				 completeMethod="#{manageUsuario.completaNome}" 				 
 				 >
 					<p:ajax event="itemSelect" listener="#{manageUsuario.onItemSelect}" update="msgs tabelaEstiloCurtido"/>
 				</p:autoComplete>				
 				 
-				 <h:commandLink value="Limpar" action="#{manageUsuario.inserirEstiloCurtido}">
+				 <h:commandLink value="Adicionar" action="#{manageUsuario.inserirEstiloCurtido}">
 				 	<p:ajax update="estiloCurti" resetValues="true" />				 			 
 				 </h:commandLink>		 				
 				
@@ -140,13 +140,11 @@
 				<p> Estilos musicais que você NÃO curte*: </p>
 				 <p:autoComplete id="estiloNaoCurti" value="#{manageUsuario.estiloNaoCurtido}" 
 				 completeMethod="#{manageUsuario.completaNome}" 
-				 required="true"
-				 requiredMessage="Você deve escolher pelo menos 1 estilo que NÃO curte"
 				 >
 					<p:ajax event="itemSelect" listener="#{manageUsuario.onItemSelect}" update="msgs tabelaEstiloNaoCurtido"/>
 				</p:autoComplete> 
 				
-				<h:commandLink value="Limpar" action="#{manageUsuario.inserirEstiloNaoCurtido}">
+				<h:commandLink value="Adicionar" action="#{manageUsuario.inserirEstiloNaoCurtido}">
 				 	<p:ajax update="estiloNaoCurti" resetValues="true" />				 			 
 				 </h:commandLink>
 				 
@@ -170,16 +168,14 @@
 					</p:dataTable>
     			</p:overlayPanel> 
 				
-				<p> Bandas que você adora*: </p>
+				<p> Bandas que você gosta*: </p>
 				 <p:autoComplete id="bandas" value="#{manageUsuario.banda}" 
-				 completeMethod="#{manageUsuario.completaNomeBanda}" 
-				 required="true"
-				 requiredMessage="Você deve escolher pelo menos 1 banda"
+				 completeMethod="#{manageUsuario.completaNomeBanda}" 				 
 				 >
 					<p:ajax event="itemSelect" listener="#{manageUsuario.onItemSelect}" update="msgs tabelaBandas"/>
 				</p:autoComplete>
 				
-				<h:commandLink value="Limpar" action="#{manageUsuario.inserirBandas}">
+				<h:commandLink value="Adicionar" action="#{manageUsuario.inserirBandas}">
 				 	<p:ajax update="bandas" resetValues="true" />				 			 
 				 </h:commandLink>
 				 
@@ -203,9 +199,9 @@
 					</p:dataTable>
     			</p:overlayPanel>
 				
-				 
 				<br></br><br></br>
-				
+				 
+				 				 
 				<h2> Escolha um avatar: </h2>
 				
 				<p:dataList value="#{manageUsuario.avatars}" var="avatar" type="definition">
@@ -216,9 +212,7 @@
 			        <f:facet name="description">
             			<img src="#{facesContext.externalContext.requestContextPath}/resources/imagens/avatar/#{avatar}.jpg" height="43" width="48"/> 
         			</f:facet>			        
-			    </p:dataList>	
-			    
-			    <br></br><br></br>	
+			    </p:dataList>		
 
 				
 			      		
