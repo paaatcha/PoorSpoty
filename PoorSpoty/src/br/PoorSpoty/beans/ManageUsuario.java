@@ -33,12 +33,11 @@ public class ManageUsuario implements Serializable{
 	@EJB
 	UsuarioDAO usuarioDAO;
 	DataModel<Usuario> usuarios;
-	Usuario usuario = new Usuario();;
+	Usuario usuario = new Usuario();
 	
 	@EJB
 	EstiloMusicalDAO estiloMusicalDAO;
 	private List<EstiloMusical> estilos;
-
 	
 	@EJB
 	BandaDAO bandaDAO;
@@ -147,7 +146,11 @@ public class ManageUsuario implements Serializable{
 			this.usuario.setBandas(listStringToListBanda(this.bandas));			
 			this.usuario.setEstilos(listStringToListEstilo(this.estilosCurtidos));
 			this.usuario.setEstilosNao(listStringToListEstilo(this.estilosNaoCurtidos));	
-			
+						
+			estilosCurtidos.clear();
+			estilosNaoCurtidos.clear();
+			bandas.clear();
+		
 			//this.usuario.printUsuario();
 			
 			this.usuarioDAO.salvar(usuario);
@@ -165,11 +168,15 @@ public class ManageUsuario implements Serializable{
 			
 			//this.usuario.printUsuario();
 			
+			estilosCurtidos.clear();
+			estilosNaoCurtidos.clear();
+			bandas.clear();
+			
 			this.usuarioDAO.salvar(usuario);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return "index";
+		return "sucessoCadastro";
 	}	
 	
 	public void excluir(){
