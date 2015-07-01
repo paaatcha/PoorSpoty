@@ -33,7 +33,7 @@ public class ManageUsuario implements Serializable{
 	@EJB
 	UsuarioDAO usuarioDAO;
 	DataModel<Usuario> usuarios;
-	Usuario usuario;
+	Usuario usuario = new Usuario();;
 	
 	@EJB
 	EstiloMusicalDAO estiloMusicalDAO;
