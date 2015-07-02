@@ -51,53 +51,33 @@
 	
 	<ui:insert name="parteInferiorUsuario">	
 		<div class="boxBordaClear">				
-		</div>
+		</div>	
 	
-		<!-- 
-		<div id="boxRankings">	
-			<div id="boxRankingBandas">
-				<h2> Top 5 bandas PoorSpoty: </h2>
-				<ol>
-					<li> getBanda1 (); </li>
-					<li> getBanda2 (); </li>
-					<li> getBanda3 (); </li>
-					<li> getBanda4 (); </li>
-					<li> getBanda5 (); </li>		
-				</ol>
-			</div>
-		
-			<div id="boxRankingEstilos">
-				<h2> Top 5 estilos PoorSpoty: </h2>		
-				<ol>
-					<li> getEstilo1 (); </li>
-					<li> getEstilo2 (); </li>
-					<li> getEstilo3 (); </li>
-					<li> getEstilo4 (); </li>
-					<li> getEstilo5 (); </li>		
-				</ol>		
-			</div>	
-		
-		 </div>
-		 
-		 <div class="boxBordaClear">				
-		 </div>
-		 -->
 		<div id="boxSugestao">
 			<h:form>
-				<h:commandLink action="#{auth.getMinhasBandas()}" value="Minhas Bandas" >
-					<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
- 
-					<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-    					<p:graphicImage name="../resources/images/loading.gif" />
-					</p:dialog>
-				</h:commandLink>
+				<h:commandLink action="#{auth.getMinhasBandas()}" value="Minhas Bandas" onclick="mostrar()" />				
 												
 			</h:form>
 			
 			<h:form>
-				<h:commandLink action="#{auth.goSugestao()}" value="Me sugira algo novo" />
+				<h:commandLink action="#{auth.goSugestao()}" value="Me sugira algo novo" onclick="mostrar()" />
 			</h:form>		
-				
+			
+			<br></br>
+			<br></br>
+			<img src="#{facesContext.externalContext.requestContextPath}/resources/imagens/loading.gif"
+					id = "loading" style = "display: none; width: 235px; height: 22px;"
+		 	/>
+		 	
+		 	<script type="text/javascript">
+		 		function mostrar() {
+		 			document.getElementById("loading").style.display = "block";
+		 		}
+		 	</script>
+
+		 	
+		 	
+			
 		</div>
 		
 		<div class="boxBordaClear">				

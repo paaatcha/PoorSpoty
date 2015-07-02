@@ -456,10 +456,13 @@ public class LoginBean {
 			return "/pag_usuario/semSugestao.faces";			
 		} else {
 		
-			int tamSug = this.bandasSugestao.size();		
+			int tamSug = this.bandasSugestao.size();
+			numRand = gerador.nextInt(tamSug);
 							
 			while (tamSug > 5){
-				this.bandasSugestao.remove(numRand);			
+				if (numRand <= this.bandasSugestao.size()){
+					this.bandasSugestao.remove(numRand);	
+				}
 				tamSug = this.bandasSugestao.size();
 				numRand = gerador.nextInt(tamSug);
 			}
